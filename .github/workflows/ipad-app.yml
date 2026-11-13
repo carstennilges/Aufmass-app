@@ -1,0 +1,79 @@
+# Baut die bewa-Aufmaß-App auf einem Mac in der Cloud (GitHub Actions)
+# und stellt die App-Datei (.ipa) zum Herunterladen bereit.
+# Die .ipa ist unsigniert – Sideloadly signiert sie beim Aufspielen mit deiner Apple-ID.
+name: iPad-App bauen
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: macos-15
+    timeout-minutes: 40
+    steps:
+      - name: Code holen
+        uses: actions/checkout@v4
+
+      - name: Node.js einrichten
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Abhängigkeiten installieren
+        run: npm install --no-audit --no-fund
+
+      - name: iOS-Projekt erzeugen
+        run: |
+          npx cap add ios --packagemanager CocoaPods
+          npx cap sync ios
+
+      - name: Berechtigungen, Statusleiste und App-Icon
+        run: |
+          P=ios/App/App/Info.plist
+          plutil -replace NSCameraUsageDescription -string "Fotos der Fenster und Einbausituation für das Aufmaß." "$P"
+          plutil -replace NSPhotoLibraryUsageDescription -string "Fotos aus der Mediathek zum Aufmaß hinzufügen." "$P"
+          plutil -replace NSPhotoLibraryAddUsageDescription -string "PDF und Fotos sichern." "$P"
+          plutil -replace NSBluetoothAlwaysUsageDescription -string "Verbindung zum Messgerät (z. B. nedo mEsstronic), um Maße direkt zu übernehmen." "$P"
+          plutil -replace NSBluetoothPeripheralUsageDescription -string "Verbindung zum Messgerät, um Maße direkt zu übernehmen." "$P"
+          plutil -replace UIStatusBarStyle -string "UIStatusBarStyleLightContent" "$P"
+          plutil -replace UIViewControllerBasedStatusBarAppearance -bool NO "$P"
+          plutil -replace CFBundleShortVersionString -string "6.0" "$P"
+          plutil -replace CFBundleVersion -string "${GITHUB_RUN_NUMBER}" "$P"
+          ICON_DIR=ios/App/App/Assets.xcassets/AppIcon.appiconset
+          ICON=$(ls "$ICON_DIR"/*.png | head -n 1)
+          cp www/icon-1024.png "$ICON"
+          echo "Icon ersetzt: $ICON"
+          plutil -p "$P"
+
+      - name: App bauen (ohne Signatur)
+        run: |
+          cd ios/App
+          xcodebuild \
+            -workspace App.xcworkspace \
+            -scheme App \
+            -configuration Release \
+            -sdk iphoneos \
+            -destination 'generic/platform=iOS' \
+            -derivedDataPath build \
+            CODE_SIGNING_ALLOWED=NO \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGN_IDENTITY="" \
+            build | tail -n 60
+          test -d build/Build/Products/Release-iphoneos/App.app
+
+      - name: .ipa packen
+        run: |
+          cd ios/App
+          rm -rf Payload && mkdir Payload
+          cp -R build/Build/Products/Release-iphoneos/App.app Payload/
+          zip -qry "$GITHUB_WORKSPACE/bewa-Aufmass.ipa" Payload
+          ls -la "$GITHUB_WORKSPACE/bewa-Aufmass.ipa"
+
+      - name: App-Datei bereitstellen
+        uses: actions/upload-artifact@v4
+        with:
+          name: bewa-Aufmass-iPad-App
+          path: bewa-Aufmass.ipa
+          retention-days: 30
