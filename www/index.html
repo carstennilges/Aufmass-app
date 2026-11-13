@@ -539,6 +539,8 @@ body.printing #print{display:block !important}
 <input type="file" id="fotoIn" accept="image/*" multiple style="display:none">
 
 <div id="print"></div>
+<!-- Capacitor-Laufzeit (wird beim App-Bau in www/ kopiert; im Browser fehlt sie absichtlich) -->
+<script src="capacitor.js"></script>
 <script>
 /* ==================================================================
    1) TYPEN-BIBLIOTHEK  (bewa-plast Vario 6 CUBEline, Blatt "Typen")
@@ -1662,7 +1664,13 @@ function fileName(ext){
 /* ---- Native App (Capacitor) ---- */
 const CAP=window.Capacitor;
 const NATIVE=!!(CAP && CAP.isNativePlatform && CAP.isNativePlatform());
-const plug=n=>NATIVE ? CAP.registerPlugin(n) : null;
+const plug=n=>{
+  if(!NATIVE) return null;
+  try{
+    if(typeof CAP.registerPlugin==='function') return CAP.registerPlugin(n);
+    return (CAP.Plugins && CAP.Plugins[n]) || null;
+  }catch(e){ console.warn('Plugin '+n+' nicht verfügbar',e); return null; }
+};
 const NShare=plug('Share'), NFS=plug('Filesystem'), NPrint=plug('AufmassNative');
 async function nativeShareFile(name,content,text){
   const w=await NFS.writeFile({path:name,data:content,directory:'CACHE',encoding:'utf8'});
