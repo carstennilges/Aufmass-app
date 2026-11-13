@@ -1,0 +1,10 @@
+{
+  "appId": "de.holzcenternilges.aufmass",
+  "appName": "bewa Aufmaß",
+  "webDir": "www",
+  "ios": {
+    "contentInset": "never",
+    "backgroundColor": "#14356b",
+    "scheme": "App"
+  }
+}

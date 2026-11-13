@@ -1,0 +1,20 @@
+{
+  "name": "bewa-aufmass-ipad",
+  "version": "6.0.0",
+  "private": true,
+  "description": "bewa Aufmaß – iPad-App (Holzcenter Nilges / Schreinerei Link)",
+  "scripts": {
+    "sync": "cap sync ios"
+  },
+  "dependencies": {
+    "@capacitor-community/bluetooth-le": "^7.0.0",
+    "@capacitor/core": "^7.0.0",
+    "@capacitor/filesystem": "^7.0.0",
+    "@capacitor/ios": "^7.0.0",
+    "@capacitor/share": "^7.0.0",
+    "aufmass-native": "file:./plugins/aufmass-native"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^7.0.0"
+  }
+}
