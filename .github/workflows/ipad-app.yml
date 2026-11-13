@@ -10,7 +10,8 @@ on:
 
 jobs:
   build:
-    runs-on: macos-15
+    # Intel-Mac: bei den Apple-Silicon-Macs (macos-15) gibt es bei GitHub oft lange Warteschlangen
+    runs-on: macos-15-intel
     timeout-minutes: 40
     steps:
       - name: Code holen
