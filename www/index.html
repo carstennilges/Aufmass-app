@@ -1,0 +1,1885 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<title>bewa Aufmaß – Fenster Vario 6 · 7 · 8</title>
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#14356b">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="bewa Aufmaß">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="icon" href="icon-192.png">
+<style>
+:root{
+  --blue:#14356b; --blue2:#1d4b8f; --blue-l:#e8eef7;
+  --orange:#e2661f; --ink:#1b2129; --muted:#6b7683;
+  --line:#d3dae2; --bg:#f2f4f7; --card:#fff;
+  --ok:#1f8a5b; --warn:#c0392b;
+  --r:12px;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  background:var(--bg);color:var(--ink);font-size:15px;line-height:1.4;padding-bottom:96px}
+h1,h2,h3{margin:0}
+button{font-family:inherit;font-size:inherit;cursor:pointer}
+input,select,textarea{font-family:inherit;font-size:16px;color:var(--ink)}
+
+/* ---------- Kopfleiste ---------- */
+header{position:sticky;top:0;z-index:40;background:var(--blue);color:#fff;
+  box-shadow:0 2px 10px rgba(0,0,0,.18);padding-top:env(safe-area-inset-top)}
+.hdr-top{display:flex;align-items:center;gap:10px;padding:10px 14px}
+.saved{font-size:10px;opacity:.75;margin-top:2px}
+.saved b{font-weight:700}
+.logo{display:flex;align-items:center;gap:7px;font-weight:800;letter-spacing:.3px}
+.logo .bars{display:flex;flex-direction:column;gap:2px}
+.logo .bars i{display:block;width:5px;height:5px;background:var(--orange)}
+.logo small{display:block;font-size:9px;letter-spacing:2px;font-weight:600;opacity:.8}
+.hdr-top .sum{margin-left:auto;text-align:right;font-size:11px;opacity:.85;line-height:1.25}
+.hdr-top .sum b{font-size:16px;display:block}
+.mbadge{display:inline-block;margin-top:3px;background:var(--orange);color:#fff;font-size:10px;
+  font-weight:800;letter-spacing:.4px;padding:2px 8px;border-radius:999px;text-transform:uppercase}
+nav{display:flex;background:var(--blue2)}
+nav button{flex:1;background:none;border:0;color:#c9d8ee;padding:11px 4px;font-size:13px;font-weight:600;
+  border-bottom:3px solid transparent}
+nav button.on{color:#fff;border-bottom-color:var(--orange);background:rgba(255,255,255,.07)}
+
+/* ---------- Layout ---------- */
+main{max-width:1100px;margin:0 auto;padding:14px 12px 10px}
+.view{display:none}.view.on{display:block}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);margin-bottom:12px;overflow:hidden}
+.card>h3{background:var(--blue-l);color:var(--blue);font-size:12.5px;text-transform:uppercase;
+  letter-spacing:.6px;padding:9px 13px;border-bottom:1px solid var(--line)}
+.card .body{padding:13px}
+.grid{display:grid;gap:11px}
+.g2{grid-template-columns:1fr 1fr}
+.g3{grid-template-columns:1fr 1fr 1fr}
+@media(max-width:640px){.g3{grid-template-columns:1fr 1fr}}
+label.f{display:block}
+label.f>span{display:block;font-size:11.5px;font-weight:700;color:var(--muted);
+  text-transform:uppercase;letter-spacing:.4px;margin-bottom:4px}
+input[type=text],input[type=number],input[type=date],select,textarea{
+  width:100%;padding:10px 11px;border:1px solid var(--line);border-radius:9px;background:#fbfcfd}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--blue2);background:#fff;
+  box-shadow:0 0 0 3px rgba(29,75,143,.13)}
+textarea{min-height:64px;resize:vertical}
+.hint{font-size:11.5px;color:var(--muted);margin-top:5px}
+
+/* ---------- Chips / Segmente ---------- */
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{border:1px solid var(--line);background:#fbfcfd;border-radius:999px;padding:8px 13px;
+  font-size:13.5px;font-weight:600;color:#44505e}
+.chip.on{background:var(--blue);border-color:var(--blue);color:#fff}
+.chip.sm{padding:6px 11px;font-size:12.5px}
+.seg{display:flex;border:1px solid var(--line);border-radius:9px;overflow:hidden;background:#fbfcfd}
+.seg button{flex:1;border:0;background:none;padding:9px 2px;font-size:13px;font-weight:600;color:#44505e;
+  border-right:1px solid var(--line)}
+.seg button:last-child{border-right:0}
+.seg button.on{background:var(--blue);color:#fff}
+.tog{display:flex;align-items:center;gap:9px;padding:7px 0;font-size:14px}
+.tog input{width:22px;height:22px;accent-color:var(--blue)}
+
+/* ---------- Positionen ---------- */
+.pos{background:#fff;border:1px solid var(--line);border-left:5px solid var(--blue);
+  border-radius:var(--r);margin-bottom:11px;overflow:hidden}
+.pos.incomplete{border-left-color:var(--orange)}
+.pos-head{display:flex;align-items:center;gap:11px;padding:11px 12px}
+.pos-num{background:var(--blue);color:#fff;font-weight:800;min-width:34px;height:34px;border-radius:8px;
+  display:flex;align-items:center;justify-content:center;font-size:14px;flex:0 0 auto}
+.pos-mini{width:52px;height:44px;flex:0 0 auto;display:flex;align-items:center;justify-content:center}
+.pos-info{flex:1;min-width:0}
+.pos-info b{display:block;font-size:14.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pos-info span{font-size:12px;color:var(--muted)}
+.pos-caret{border:0;background:#eef1f5;color:var(--blue);width:34px;height:34px;border-radius:8px;font-size:15px}
+.pos-body{display:none;padding:0 12px 13px;border-top:1px solid var(--line)}
+.pos.open .pos-body{display:block}
+.pos.open .pos-caret{background:var(--blue);color:#fff}
+.sub{font-size:11.5px;font-weight:800;color:var(--blue);text-transform:uppercase;letter-spacing:.5px;
+  margin:15px 0 8px;padding-bottom:5px;border-bottom:1px dashed var(--line)}
+.sub.grph{display:flex;align-items:center;gap:8px;cursor:pointer;background:#f7f9fb;border:1px solid var(--line);
+  border-radius:9px;padding:10px 11px;margin:14px 0 0}
+.sub.grph em{flex:1;font-style:normal;font-weight:600;text-transform:none;letter-spacing:0;color:var(--muted);
+  font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-align:right}
+.sub.grph span{color:var(--blue);font-size:11px}
+.grpb{padding-top:4px}
+.masse{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+.masse input{font-size:22px;font-weight:700;text-align:center;padding:12px 6px;letter-spacing:.5px}
+.preview{background:#f7f9fb;border:1px solid var(--line);border-radius:10px;padding:12px;
+  display:flex;align-items:center;justify-content:center;min-height:150px}
+.typbtn{display:flex;align-items:center;gap:11px;width:100%;text-align:left;border:1px solid var(--line);
+  background:#fbfcfd;border-radius:10px;padding:9px 11px}
+.typbtn .sk{width:56px;height:48px;flex:0 0 auto;display:flex;align-items:center;justify-content:center}
+.typbtn b{font-size:15px}.typbtn small{display:block;color:var(--muted);font-size:11.5px}
+.rowbtns{display:flex;gap:8px;margin-top:14px}
+.btn{border:1px solid var(--line);background:#fff;border-radius:9px;padding:10px 13px;font-size:13px;
+  font-weight:600;color:#44505e}
+.btn.danger{color:var(--warn);border-color:#f0cfca}
+.btn.primary{background:var(--blue);border-color:var(--blue);color:#fff}
+.btn.orange{background:var(--orange);border-color:var(--orange);color:#fff}
+.empty{text-align:center;color:var(--muted);padding:38px 18px;background:#fff;border:1px dashed var(--line);
+  border-radius:var(--r)}
+
+/* ---------- Modal Typenwahl ---------- */
+.modal{position:fixed;inset:0;background:rgba(15,22,34,.55);z-index:90;display:none;
+  align-items:flex-end;justify-content:center}
+.modal.on{display:flex}
+.sheet{background:#fff;width:100%;max-width:900px;max-height:92vh;border-radius:16px 16px 0 0;
+  display:flex;flex-direction:column;overflow:hidden}
+.sheet-h{display:flex;align-items:center;gap:10px;padding:13px;border-bottom:1px solid var(--line)}
+.sheet-h b{font-size:16px}
+.sheet-h .x{margin-left:auto;border:0;background:#eef1f5;width:34px;height:34px;border-radius:8px;font-size:17px}
+.sheet-b{overflow:auto;padding:12px;-webkit-overflow-scrolling:touch}
+.katrow{display:flex;gap:6px;padding:0 12px 11px;flex-wrap:wrap}
+.tgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(112px,1fr));gap:9px}
+.tcard{border:1px solid var(--line);border-radius:10px;padding:8px 5px;background:#fbfcfd;text-align:center}
+.tcard.on{border-color:var(--blue);background:var(--blue-l);box-shadow:0 0 0 2px rgba(20,53,107,.16)}
+.tcard .sk{height:66px;display:flex;align-items:center;justify-content:center;margin-bottom:5px}
+.tcard b{font-size:14px;display:block}
+.tcard small{font-size:10px;color:var(--muted);display:block;line-height:1.25;height:26px;overflow:hidden}
+
+/* ---------- Fußleiste ---------- */
+.fab{position:fixed;left:0;right:0;bottom:0;z-index:50;background:rgba(255,255,255,.96);
+  border-top:1px solid var(--line);display:flex;gap:9px;
+  padding:9px 12px calc(9px + env(safe-area-inset-bottom));
+  backdrop-filter:blur(8px);max-width:1100px;margin:0 auto}
+.fab button{flex:1;padding:13px 8px;border-radius:11px;border:1px solid var(--line);background:#fff;
+  font-weight:700;font-size:14px;color:#44505e}
+.fab button.main{background:var(--orange);border-color:var(--orange);color:#fff;flex:1.5}
+.fab button.pdf{background:var(--blue);border-color:var(--blue);color:#fff}
+
+table.ovw{width:100%;border-collapse:collapse;font-size:12.5px;background:#fff}
+table.ovw th{background:var(--blue);color:#fff;font-weight:600;padding:7px 5px;text-align:left;font-size:11px}
+table.ovw td{border-bottom:1px solid var(--line);padding:7px 5px}
+.scroll{overflow-x:auto;border:1px solid var(--line);border-radius:var(--r)}
+.warnbox{background:#fff6f4;border:1px solid #f0cfca;color:#8d2f21;border-radius:10px;padding:10px 12px;
+  font-size:13px;margin-bottom:12px}
+.okbox{background:#f0f9f4;border:1px solid #bfe3ce;color:#186346;border-radius:10px;padding:10px 12px;
+  font-size:13px;margin-bottom:12px}
+
+/* ---------- Druck / PDF ---------- */
+#print{display:none}
+@media print{
+  @page{size:A4 landscape;margin:7mm}
+  body{background:#fff;padding:0;font-size:9px}
+  header,main,.fab,.modal{display:none !important}
+  #print{display:block !important}
+  .sheetpg{width:100% !important;margin:0 !important}
+  .sheetpg{page-break-after:always;break-after:page}
+  .sheetpg:last-child{page-break-after:auto;break-after:auto}
+}
+#print{font-family:Arial,Helvetica,sans-serif;color:#000}
+.sheetpg{width:283mm;padding:0;margin:0 auto 10mm;background:#fff}
+.pbar{background:#14356b;color:#fff;font-size:9px;font-weight:bold;padding:2px 6px;text-align:right}
+.phead{display:flex;border:1px solid #14356b;margin-top:2mm}
+.phead>div{border-right:1px solid #14356b;padding:2mm 3mm;font-size:9px}
+.phead>div:last-child{border-right:0}
+.plogo{width:52mm}
+.plogo .bn{font-size:15px;font-weight:800;color:#14356b;letter-spacing:-.5px}
+.plogo .bs{font-size:7px;letter-spacing:2px;color:#14356b}
+.plogo .ad{font-size:6.5px;line-height:1.35;margin-top:1.5mm;color:#333}
+.pf{margin-bottom:1.6mm}
+.pf u{display:inline-block;min-width:34mm;border-bottom:.4px solid #888;text-decoration:none;font-weight:bold}
+.plab{font-size:7px;color:#444;display:block}
+.ptbl{width:100%;border-collapse:collapse;margin-top:2mm;table-layout:fixed}
+.ptbl th,.ptbl td{border:.5px solid #333;font-size:7px;padding:1px 1.5px;text-align:center;
+  word-wrap:break-word;overflow:hidden}
+.ptbl th{background:#eef1f6;font-weight:bold;line-height:1.1;height:11mm;vertical-align:middle}
+.ptbl td{height:9.2mm;vertical-align:middle;font-size:8px}
+.ptbl .lft{text-align:left;padding-left:2px}
+.ptbl tr.z td{background:#fafbfc}
+.pgroup{background:#14356b;color:#fff;font-size:8px;font-weight:bold;padding:1px}
+.pfoot{font-size:7px;font-weight:bold;margin-top:1.5mm;line-height:1.4}
+.pbox{border:1px solid #14356b;padding:2mm 3mm;margin-top:2mm;font-size:8.5px}
+.pcols{display:flex;gap:0}
+.pcols>div{flex:1;border-right:1px solid #14356b;padding:2mm 3mm;font-size:8px}
+.pcols>div:last-child{border-right:0}
+.pcols b{font-size:8.5px;display:block;margin-bottom:1mm}
+.pl{line-height:1.75}
+.tick{font-family:"DejaVu Sans",Arial,sans-serif}
+.psys{border:1px solid #14356b;background:#eef1f6;font-size:8px;font-weight:bold;padding:1.2mm 3mm;margin-top:2mm}
+.skgrid{display:flex;flex-wrap:wrap;margin-top:2mm}
+.skitem{width:24.4%;margin:.3%;border:.5px solid #333;padding:1.5mm;text-align:center;box-sizing:border-box}
+.skh{background:#eef1f6;font-size:8px;font-weight:bold;padding:.8mm;margin:-1.5mm -1.5mm 1.5mm}
+.skb{height:26mm;display:flex;align-items:center;justify-content:center}
+.skf{font-size:7.5px;line-height:1.35;border-top:.5px solid #ccc;padding-top:1mm}
+.phgrid{display:flex;flex-wrap:wrap;margin-top:2mm}
+.phitem{width:32.6%;margin:.35%;border:.5px solid #333;box-sizing:border-box;text-align:center;page-break-inside:avoid}
+.phitem .skh{margin:0}
+.phitem .phb{height:72mm;display:flex;align-items:center;justify-content:center;padding:1mm}
+.phitem img{max-width:100%;max-height:70mm}
+
+/* ---------- Aufmaß-Liste ---------- */
+.curname{font-size:12px;opacity:.9;margin-left:6px;padding-left:10px;border-left:1px solid rgba(255,255,255,.3);
+  max-width:38vw;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.alist{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px}
+.acard{background:#fff;border:1px solid var(--line);border-left:5px solid var(--blue);border-radius:var(--r);
+  padding:12px 13px;display:flex;flex-direction:column;gap:6px}
+.acard.cur{border-left-color:var(--orange);box-shadow:0 0 0 2px rgba(226,102,31,.25)}
+.acard b{font-size:15.5px}
+.acard .meta{font-size:12px;color:var(--muted)}
+.acard .rowbtns{margin-top:6px}
+.tag{display:inline-block;background:var(--blue-l);color:var(--blue);font-size:10.5px;font-weight:700;
+  padding:2px 7px;border-radius:999px;margin-right:4px}
+.tag.o{background:#fdeee5;color:var(--orange)}
+.asearch{display:flex;gap:9px;margin-bottom:12px}
+.asearch input{flex:1}
+body.v-list .fab{display:none}
+
+/* ---------- Fotos ---------- */
+.thumbs{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+.thumb{width:92px;height:72px;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:#f7f9fb;
+  position:relative;padding:0}
+.thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.thumb i{position:absolute;left:3px;bottom:3px;background:rgba(20,53,107,.85);color:#fff;font-style:normal;
+  font-size:9.5px;padding:1px 5px;border-radius:5px}
+.mbtn{width:92px;height:72px;border:1px dashed #9fb0c6;border-radius:8px;background:#f7f9fb;color:var(--blue);
+  font-weight:700;font-size:12.5px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px}
+.mbtn span{font-size:20px}
+.viewer{position:fixed;inset:0;background:rgba(10,14,22,.92);z-index:95;display:none;flex-direction:column}
+.viewer.on{display:flex}
+.viewer .vb{flex:1;display:flex;align-items:center;justify-content:center;padding:10px;min-height:0}
+.viewer img{max-width:100%;max-height:100%;background:#fff}
+.viewer .vt{display:flex;gap:9px;padding:10px 12px calc(10px + env(safe-area-inset-bottom));justify-content:center;flex-wrap:wrap}
+.viewer .vt .btn{min-width:120px}
+
+/* ---------- Skizzen-Editor ---------- */
+.sked{position:fixed;inset:0;background:#e9edf2;z-index:100;display:none;flex-direction:column}
+.sked.on{display:flex}
+.skbar{display:flex;flex-wrap:wrap;gap:6px;align-items:center;background:var(--blue);color:#fff;
+  padding:calc(7px + env(safe-area-inset-top)) 10px 7px}
+.skbar .grp{display:flex;gap:4px;align-items:center;background:rgba(255,255,255,.1);border-radius:9px;padding:3px}
+.skbar button{border:0;background:none;color:#fff;font-weight:700;font-size:13px;padding:8px 10px;border-radius:7px;min-width:38px}
+.skbar button.on{background:#fff;color:var(--blue)}
+.skbar .col{width:26px;height:26px;min-width:26px;padding:0;border-radius:50%;border:2px solid rgba(255,255,255,.5)}
+.skbar .col.on{border:3px solid #fff;box-shadow:0 0 0 2px var(--orange)}
+.skbar .sp{flex:1}
+.skbar .save{background:var(--orange)}
+.skbar label{font-size:12px;display:flex;align-items:center;gap:5px;padding:0 6px}
+.skwrap{flex:1;display:flex;align-items:center;justify-content:center;padding:10px;min-height:0;position:relative}
+.skstage{position:relative;box-shadow:0 2px 14px rgba(0,0,0,.18);background:#fff}
+.skstage canvas{position:absolute;left:0;top:0;width:100%;height:100%;touch-action:none}
+.skhint{font-size:11.5px;color:var(--muted);text-align:center;padding:0 0 calc(6px + env(safe-area-inset-bottom))}
+
+/* ---------- Messgerät-Eingabe ---------- */
+.masse input.hot{border-color:var(--orange);box-shadow:0 0 0 3px rgba(226,102,31,.2)}
+.bt{font-size:11px;color:var(--muted);margin-top:6px}
+.masse input.target{border-color:var(--orange);border-width:2px;background:#fff8f3}
+.btbtn{display:none;align-items:center;gap:6px;border:1px solid rgba(255,255,255,.35);background:rgba(255,255,255,.1);
+  color:#fff;border-radius:999px;padding:6px 12px;font-size:12.5px;font-weight:700;margin-left:10px}
+.btbtn i{width:9px;height:9px;border-radius:50%;background:#9aa7b8;display:inline-block}
+.btbtn.on i{background:#3ddc84;box-shadow:0 0 0 3px rgba(61,220,132,.3)}
+.btlog{font-family:Menlo,Consolas,monospace;font-size:11.5px;background:#0f1622;color:#cfe3ff;border-radius:9px;
+  padding:9px;max-height:200px;overflow:auto;white-space:pre-wrap;word-break:break-all}
+.toast{position:fixed;left:50%;bottom:calc(90px + env(safe-area-inset-bottom));transform:translateX(-50%);z-index:120;
+  background:#14356b;color:#fff;padding:11px 18px;border-radius:999px;font-weight:700;font-size:15px;
+  box-shadow:0 6px 20px rgba(0,0,0,.25);opacity:0;transition:opacity .2s;pointer-events:none}
+.toast.on{opacity:1}
+body.printing header,body.printing main,body.printing .fab,body.printing .modal{display:none !important}
+body.printing #print{display:block !important}
+
+/* ---------- iPad quer / große Bildschirme ---------- */
+@media (min-width:900px){
+  main{max-width:1400px}
+  .fab{max-width:1400px}
+  #posList.wide{display:grid;grid-template-columns:320px minmax(0,1fr);gap:14px;align-items:start}
+  .plist{position:sticky;top:calc(var(--hh,110px) + 10px);max-height:calc(100vh - var(--hh,110px) - 110px);
+    overflow:auto;-webkit-overflow-scrolling:touch;background:#fff;border:1px solid var(--line);border-radius:var(--r)}
+  .pli{display:flex;align-items:center;gap:9px;padding:9px 10px;border-bottom:1px solid var(--line);cursor:pointer;
+    border-left:4px solid var(--blue)}
+  .pli.incomplete{border-left-color:var(--orange)}
+  .pli.on{background:var(--blue-l)}
+  .pli .pos-num{min-width:28px;height:28px;font-size:12.5px}
+  .pli .pos-mini{width:42px;height:36px}
+  .pli .pos-info b{font-size:13.5px}
+  .pli .pos-info span{font-size:11px}
+  .pli .ph{font-size:11px;color:var(--muted);white-space:nowrap}
+  .pdetail .pos{border-left-width:6px}
+  .pdetail .pos-caret{display:none}
+  .pdetail .pos-head{cursor:default}
+  #v-kopf.on{display:grid;grid-template-columns:1fr 1fr;gap:0 12px;align-items:start}
+  #v-kopf .card:first-child{grid-column:1/-1}
+  .sheet{border-radius:16px;margin-bottom:4vh}
+  .modal{align-items:center}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="hdr-top">
+    <div class="logo">
+      <span class="bars"><i></i><i></i><i></i></span>
+      <span>bewa-plast <small id="serieLbl">AUFMASS VARIO 6 CUBELINE</small></span>
+    </div>
+    <div class="curname" id="curName"></div>
+    <button class="btbtn" id="btBtn" onclick="openBt()"><i></i><span id="btState">Messgerät</span></button>
+    <div class="sum"><b id="sumStk">0</b>Stück / <span id="sumPos">0</span> Pos.
+      <div id="massBadge" class="mbadge">Bestellmaße</div>
+      <div class="saved" id="savedInfo">nicht gespeichert</div></div>
+  </div>
+  <nav>
+    <button data-v="list">☰ Aufmaße</button>
+    <button class="on" data-v="kopf">1 · Kopfdaten</button>
+    <button data-v="pos">2 · Aufmaß</button>
+    <button data-v="ovw">3 · Prüfen &amp; PDF</button>
+  </nav>
+</header>
+
+<main>
+<!-- ========== ALLE AUFMASSE ========== -->
+<section class="view" id="v-list">
+  <div class="asearch">
+    <input type="text" id="aSearch" placeholder="Suchen: Kunde, Kommission, Ort …" oninput="renderList()">
+    <button class="btn orange" onclick="neuesAufmass()">＋ Neues Aufmaß</button>
+  </div>
+  <div class="alist" id="aList"></div>
+  <div class="hint" style="margin-top:12px" id="storeHint"></div>
+</section>
+
+<!-- ========== KOPFDATEN ========== -->
+<section class="view on" id="v-kopf">
+  <div class="card"><h3>Auftrag</h3><div class="body">
+    <div class="grid g3">
+      <label class="f"><span>Kunde</span><input type="text" data-k="kunde" placeholder="Firma / Name"></label>
+      <label class="f"><span>Kommission</span><input type="text" data-k="kommission" placeholder="z.B. Müller, Haus 2"></label>
+      <label class="f"><span>Bauvorhaben (BV)</span><input type="text" data-k="bv"></label>
+      <label class="f"><span>Straße</span><input type="text" data-k="strasse"></label>
+      <label class="f"><span>PLZ / Ort</span><input type="text" data-k="ort"></label>
+      <label class="f"><span>Auftr.-Nr.</span><input type="text" data-k="auftrnr"></label>
+      <label class="f"><span>Datum</span><input type="date" data-k="datum"></label>
+      <label class="f"><span>Angestrebte Liefer-KW</span><input type="text" data-k="lieferkw" inputmode="numeric" placeholder="KW"></label>
+      <label class="f"><span>Aufmaß durch</span><input type="text" data-k="monteur"></label>
+    </div>
+    <div class="grid g3" style="margin-top:12px">
+      <label class="f"><span>Vorgang</span><div class="seg" data-seg="vorgang" data-opts="Anfrage|Bestellung"></div></label>
+      <label class="f"><span>Montage</span><div class="seg" data-seg="montage" data-opts="mit|ohne"></div></label>
+      <label class="f"><span>Bauart</span><div class="seg" data-seg="bauart" data-opts="Neubau|Altbau"></div></label>
+      <label class="f"><span>Lieferung</span><div class="seg" data-seg="lieferung" data-opts="Lieferanschrift|Lagerlieferung|BVH"></div></label>
+      <label class="f" style="grid-column:1/-1"><span>Maßangabe</span>
+        <div class="seg" data-seg="massart" data-opts="Bestellmaße|Angebotsmaße"></div>
+        <div class="hint" id="massHint"></div></label>
+    </div>
+  </div></div>
+
+  <div class="card"><h3>System &amp; Profile</h3><div class="body">
+    <div id="sysBox"></div>
+    <div class="grid g3" style="margin-top:13px">
+      <label class="f"><span>Farbe innen</span><input type="text" data-k="farbeInnen" placeholder="weiß / woodec / aludec"></label>
+      <label class="f"><span>Farbe außen</span><input type="text" data-k="farbeAussen" placeholder="weiß / woodec / aludec"></label>
+      <label class="f"><span>Glasart Standard</span><input type="text" data-k="glasStd" placeholder="z.B. 2-fach Ug 1,1 / 3-fach"></label>
+    </div>
+    <div class="hint">Standardwerte werden bei neuen Positionen automatisch übernommen.</div>
+  </div></div>
+
+  <div class="card"><h3>Dübellochbohrung · Beschlag · Zubehör</h3><div class="body">
+    <div class="grid g2">
+      <label class="f"><span>Dübelloch Ø</span><div class="seg" data-seg="duebel" data-opts="6 mm|10 mm"></div></label>
+      <label class="f"><span>Lage</span><div class="seg" data-seg="duebelLage" data-opts="n. innen versetzt"></div></label>
+    </div>
+    <label class="f" style="margin-top:11px"><span>Sicherheitsstufe Beschlag</span>
+      <div class="chips" data-chips="sicherheit" data-opts="B1 4-fach|B|C|RC1N|RC2|RC2N|RC3|Bodyguard" data-single="1"></div>
+    </label>
+    <label class="f" style="margin-top:11px"><span>Zubehör</span>
+      <div class="chips" data-chips="zubehoer" data-opts="Griff und Schnäpper|Alu Trittschutz 67501|Alu Ablaufprofil 27301"></div>
+    </label>
+  </div></div>
+
+  <div class="card"><h3>Rollladen (Standard)</h3><div class="body">
+    <div class="grid g3">
+      <label class="f" style="grid-column:1/-1"><span>Panzertyp</span>
+        <div class="chips" data-chips="rlTyp" data-opts="N/52 Maxi PVC|M/40 Mini PVC|NT/17 Mini PVC|AP/52 Maxi ALU|AP/40 Mini ALU" data-single="1"></div></label>
+      <label class="f" style="grid-column:1/-1"><span>Panzerfarbe</span>
+        <div class="chips" data-chips="rlFarbe" data-opts="10B weiß|21B grau|22B lichtgrau|24B perlgrau" data-single="1"></div></label>
+      <label class="f"><span>Aufhängung</span><input type="text" data-k="rlAufhaengung"></label>
+      <label class="f"><span>Endleiste</span><input type="text" data-k="rlEndleiste"></label>
+    </div>
+    <label class="f" style="margin-top:11px"><span>Antrieb</span>
+      <div class="chips" data-chips="rlAntrieb" data-opts="S Schwenkwickler|H Halbeinlasswickler|K Kurbelantrieb|M Motorantrieb" data-single="1"></div>
+    </label>
+  </div></div>
+
+  <div class="card"><h3>Sonstiges</h3><div class="body">
+    <textarea data-k="sonstiges" placeholder="Besonderheiten, Sonderfarben, Absprachen …"></textarea>
+  </div></div>
+</section>
+
+<!-- ========== POSITIONEN ========== -->
+<section class="view" id="v-pos">
+  <div id="posList"></div>
+</section>
+
+<!-- ========== ÜBERSICHT ========== -->
+<section class="view" id="v-ovw">
+  <div id="checks"></div>
+  <div class="card"><h3>Positionsübersicht</h3><div class="body" style="padding:0">
+    <div class="scroll"><table class="ovw" id="ovwTbl"></table></div>
+  </div></div>
+  <div class="card"><h3>PDF &amp; Senden</h3><div class="body">
+    <div class="rowbtns" style="flex-wrap:wrap;margin-top:0">
+      <button class="btn primary" onclick="doPrint()">📄 PDF / Drucken (Bestellvordruck)</button>
+      <button class="btn orange" onclick="shareAll()">📤 Aufmaß teilen (Mail / AirDrop)</button>
+      <button class="btn" onclick="mailTo()">✉️ Per Mail an bewa-plast</button>
+    </div>
+    <label class="f" style="margin-top:12px"><span>Empfänger E-Mail</span>
+      <input type="text" data-k="mailTo" placeholder="info@bewa-plast.de"></label>
+    <div class="hint"><b>PDF am iPhone:</b> „PDF / Drucken“ tippen → in der Druckvorschau oben rechts auf das Teilen-Symbol →
+      <b>In Dateien sichern</b> oder direkt per Mail versenden.</div>
+    <label class="tog" style="margin-top:6px"><input type="checkbox" id="pdfFotos" checked> Fotos &amp; Skizzen als Anhang ins PDF</label>
+  </div></div>
+
+  <div class="card"><h3>Datensicherung</h3><div class="body">
+    <div class="rowbtns" style="flex-wrap:wrap;margin-top:0">
+      <button class="btn" onclick="saveJSON()">💾 Als Datei sichern (.json)</button>
+      <button class="btn" onclick="document.getElementById('loadFile').click()">📂 Aufmaß laden</button>
+      <button class="btn" onclick="copyText()">📋 Als Text kopieren</button>
+      <button class="btn" onclick="neuesAufmass()">＋ Neues Aufmaß</button>
+    </div>
+    <input type="file" id="loadFile" accept=".json,application/json" style="display:none">
+    <div class="hint">Die App speichert alle Aufmaße automatisch auf diesem Gerät (Reiter <b>☰ Aufmaße</b>).
+      Für die Übergabe ins Büro oder als Archivkopie die <b>.json-Datei</b> sichern – sie enthält auch Fotos und Skizzen.
+      „Aufmaß laden“ legt die Datei als <b>zusätzliches</b> Aufmaß an.</div>
+  </div></div>
+</section>
+</main>
+
+<div class="fab">
+  <button class="main" onclick="addPos()">＋ Position</button>
+  <button onclick="dupLast()">⧉ Wie vorige</button>
+  <button class="pdf" onclick="doPrint()">PDF</button>
+</div>
+
+<!-- Typenwahl -->
+<div class="modal" id="typModal">
+  <div class="sheet">
+    <div class="sheet-h"><b>Typ wählen</b><span id="typFor" style="color:var(--muted);font-size:13px"></span>
+      <button class="x" onclick="closeTyp()">✕</button></div>
+    <div class="katrow" id="katRow"></div>
+    <div class="sheet-b"><div class="tgrid" id="tGrid"></div></div>
+  </div>
+</div>
+
+<!-- Foto-Ansicht -->
+<div class="viewer" id="viewer">
+  <div class="vb"><img id="vImg" alt=""></div>
+  <div class="vt">
+    <button class="btn" onclick="viewStep(-1)">‹</button>
+    <button class="btn primary" onclick="viewEdit()">✏️ Beschriften</button>
+    <button class="btn danger" onclick="viewDel()">🗑 Löschen</button>
+    <button class="btn" onclick="closeViewer()">Schließen</button>
+    <button class="btn" onclick="viewStep(1)">›</button>
+  </div>
+</div>
+
+<!-- Skizzen-Editor -->
+<div class="sked" id="sked">
+  <div class="skbar">
+    <button onclick="skClose()">✕</button>
+    <div class="grp" id="skTools">
+      <button data-t="pen" class="on">✏️ Stift</button>
+      <button data-t="mass">↔ Maß</button>
+      <button data-t="text">T Text</button>
+      <button data-t="erase">⌫ Radierer</button>
+    </div>
+    <div class="grp" id="skCols">
+      <button class="col on" data-c="#111111" style="background:#111"></button>
+      <button class="col" data-c="#14356b" style="background:#14356b"></button>
+      <button class="col" data-c="#d62c1a" style="background:#d62c1a"></button>
+      <button class="col" data-c="#e2661f" style="background:#e2661f"></button>
+    </div>
+    <div class="grp" id="skW">
+      <button data-w="3">dünn</button><button data-w="6" class="on">mittel</button><button data-w="12">dick</button>
+    </div>
+    <div class="grp" id="skBg">
+      <button data-b="leer">Leer</button><button data-b="karo" class="on">Kariert</button><button data-b="typ">Fenstertyp</button>
+    </div>
+    <button onclick="skUndo()">↶ Zurück</button>
+    <button onclick="skClear()">Leeren</button>
+    <label><input type="checkbox" id="skPen"> nur Stift</label>
+    <span class="sp"></span>
+    <button class="save" onclick="skSave()">✓ Speichern</button>
+  </div>
+  <div class="skwrap" id="skWrap"><div class="skstage" id="skStage">
+    <canvas id="skBgC"></canvas><canvas id="skC"></canvas></div></div>
+  <div class="skhint">Mit Apple Pencil oder Finger zeichnen · „Maß“: Linie ziehen, dann Wert eintragen · „Text“: an die Stelle tippen</div>
+</div>
+
+<!-- Messgerät (Bluetooth) -->
+<div class="modal" id="btModal">
+  <div class="sheet">
+    <div class="sheet-h"><b>📏 Messgerät (Bluetooth)</b><span id="btSub" style="color:var(--muted);font-size:13px"></span>
+      <button class="x" onclick="closeBt()">✕</button></div>
+    <div class="sheet-b">
+      <div class="rowbtns" style="margin-top:0;flex-wrap:wrap">
+        <button class="btn primary" onclick="btConnect()">🔍 Gerät suchen &amp; verbinden</button>
+        <button class="btn" onclick="btReconnect()">↻ Letztes Gerät</button>
+        <button class="btn danger" onclick="btDisconnect()">Trennen</button>
+      </div>
+      <div class="hint">Messgerät einschalten und in Reichweite halten. Danach in der Position das Feld <b>Breite</b> antippen und messen –
+        jeder Messwert wird in das orange markierte Feld übernommen, danach geht es automatisch weiter (Breite → Höhe → nächste Position).</div>
+
+      <div class="sub">Einlernen (nur nötig, wenn Werte nicht automatisch erkannt werden)</div>
+      <div class="grid g2">
+        <label class="f"><span>Wert, der auf dem Gerät angezeigt wird (mm)</span><input type="text" inputmode="decimal" id="btCal" placeholder="z. B. 1234"></label>
+        <div style="display:flex;align-items:flex-end;gap:8px"><button class="btn orange" onclick="btLearn()">Letzte Messung zuordnen</button>
+          <button class="btn" onclick="btForget()">Zurücksetzen</button></div>
+      </div>
+      <div class="hint" id="btMap"></div>
+
+      <div class="sub">Empfangene Daten (Diagnose)</div>
+      <div class="btlog" id="btLog">– noch nichts empfangen –</div>
+      <div class="rowbtns"><button class="btn" onclick="btCopyLog()">📋 Diagnose kopieren</button></div>
+    </div>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<input type="file" id="fotoIn" accept="image/*" multiple style="display:none">
+
+<div id="print"></div>
+<script>
+/* ==================================================================
+   1) TYPEN-BIBLIOTHEK  (bewa-plast Vario 6 CUBEline, Blatt "Typen")
+   Zellen: F=Festverglasung im Blendrahmen, FFL=Festfeld im Flügel,
+   DKL/DKR=Dreh-Kipp, DL/DR=Dreh, K=Kipp, PSKL/PSKR=Hebe-Schiebe
+   ================================================================== */
+const TYPES = {
+ // ---- Fenster ----
+ '11'  :{k:'Fenster',ar:.95,b:'Festverglasung im Blendrahmen',a:['F'],       r:[[1,[['F',1]]]]},
+ '12'  :{k:'Fenster',ar:.95,b:'Festfeld im Flügel (ffl)',a:['FF'],           r:[[1,[['FFL',1]]]]},
+ '13'  :{k:'Fenster',ar:.95,b:'1-flg. Dreh-Kipp',a:['DK'],                   r:[[1,[['DKL',1]]]]},
+ '1476':{k:'Fenster',ar:.95,b:'1-flg. Kipp',a:['K'],                         r:[[1,[['K',1]]]]},
+ '1489':{k:'Fenster',ar:1.0,b:'2 Festfelder übereinander',a:['F'],           r:[[1,[['F',1]]],[1,[['F',1]]]]},
+ '1483':{k:'Fenster',ar:1.05,b:'Oberlicht Kipp + Dreh-Kipp',a:['DK'],        r:[[.45,[['K',1]]],[1,[['DKL',1]]]]},
+ '121' :{k:'Fenster',ar:1.05,b:'Dreh-Kipp + Festfeld unten',a:['DK'],        r:[[1,[['DKL',1]]],[.5,[['F',1]]]]},
+ '122' :{k:'Fenster',ar:1.05,b:'Kipp-Oberlicht + Dreh-Kipp',a:['DK'],        r:[[.38,[['K',1]]],[1,[['DKL',1]]]]},
+ '123' :{k:'Fenster',ar:1.05,b:'Festfeld oben + Dreh-Kipp',a:['DK'],         r:[[.42,[['F',1]]],[1,[['DKL',1]]]]},
+ '1495':{k:'Fenster',ar:1.05,b:'Dreh-Kipp + Kipp unten',a:['DK'],            r:[[1,[['DKL',1]]],[.45,[['K',1]]]]},
+ '26'  :{k:'Fenster',ar:.72,b:'2-flg. Stulp: DK + Dreh',a:['DK','D'],        r:[[1,[['DKL',1],['DRS',1]]]]},
+ '28'  :{k:'Fenster',ar:.72,b:'2-flg. mit Pfosten: DK + DK',a:['DK','DK'],   r:[[1,[['DKL',1],['DKR',1]]]]},
+ '219' :{k:'Fenster',ar:.72,b:'2-flg.: DK + Festverglasung',a:['DK','F'],    r:[[1,[['DKL',1],['F',1]]]]},
+ '225' :{k:'Fenster',ar:.72,b:'2-flg. Festverglasung',a:['F','F'],           r:[[1,[['F',1],['F',1]]]]},
+ '2478':{k:'Fenster',ar:.72,b:'2-flg. Kipp + Kipp',a:['K','K'],              r:[[1,[['K',1],['K',1]]]]},
+ '213' :{k:'Fenster',ar:.80,b:'2 DK oben + Festfeld unten',a:['DK','DK'],    r:[[1,[['DKL',1],['DKR',1]]],[.5,[['F',1]]]]},
+ '2481':{k:'Fenster',ar:.85,b:'4-teilig, alle Dreh-Kipp',a:['DK','DK'],      r:[[1,[['DKL',1],['DKR',1]]],[1,[['DKL',1],['DKR',1]]]]},
+ '217' :{k:'Fenster',ar:.85,b:'2 Kipp oben + 2 Festfelder',a:['K','K'],      r:[[.75,[['K',1],['K',1]]],[1,[['F',1],['F',1]]]]},
+ '218' :{k:'Fenster',ar:.85,b:'2 DK oben + 2 Festfelder',a:['DK','DK'],      r:[[.8,[['DKL',1],['DKR',1]]],[1,[['F',1],['F',1]]]]},
+ '2484':{k:'Fenster',ar:.80,b:'Oberlicht fest + 2 Flügel',a:['DK','DK'],     r:[[.42,[['F',1]]],[1,[['DKL',1],['DKR',1]]]]},
+ '2485':{k:'Fenster',ar:.80,b:'Oberlicht fest + Stulp 2-flg.',a:['D','DK'],  r:[[.42,[['F',1]]],[1,[['DLS',1],['DKR',1]]]]},
+ '2497':{k:'Fenster',ar:.85,b:'2 DK oben + 2 ffl unten',a:['DK','DK'],       r:[[1,[['DKL',1],['DKR',1]]],[.55,[['FFL',1],['FFL',1]]]]},
+ '2498':{k:'Fenster',ar:.85,b:'2 Kipp oben + 2 ffl unten',a:['K','K'],       r:[[.75,[['K',1],['K',1]]],[1,[['FFL',1],['FFL',1]]]]},
+ '35'  :{k:'Fenster',ar:.62,b:'3-flg.: DK + fest + DK',a:['DK','F','DK'],    r:[[1,[['DKL',1],['F',1.15],['DKR',1]]]]},
+ '39'  :{k:'Fenster',ar:.62,b:'3-flg. mit Stulp: DK + D + DK',a:['DK','DL','DK'],r:[[1,[['DKL',1],['DLS',1],['DKR',1]]]]},
+ '314' :{k:'Fenster',ar:.62,b:'3-flg.: DK + Dreh + DK',a:['DK','DL','DK'],    r:[[1,[['DKL',1],['DL',1],['DKR',1]]]]},
+ // ---- Türen ----
+ '126' :{k:'Tür',ar:1.9,b:'1-flg. Tür (Dreh-Kipp / Dreh)',a:['DK'],          r:[[1,[['DKL',1]]]]},
+ '161' :{k:'Tür',ar:2.0,b:'Tür mit Oberlicht (fest)',a:['DK'],               r:[[.28,[['F',1]]],[1,[['DKL',1]]]]},
+ '228' :{k:'Tür',ar:1.15,b:'2-flg. Tür mit Stulp',a:['DK','D'],              r:[[1,[['DKL',1],['DRS',1]]]]},
+ '230' :{k:'Tür',ar:1.15,b:'2-flg. Tür mit Pfosten',a:['DK','DK'],           r:[[1,[['DKL',1],['DKR',1]]]]},
+ // ---- PSKT ----
+ '231' :{k:'PSKT',ar:.72,b:'PSK: Festfeld + Schiebeflügel',a:['F','PSK'],    r:[[1,[['F',1],['PSKR',1]]]]},
+ '232' :{k:'PSKT',ar:.72,b:'PSK: Drehflügel + Schiebeflügel',a:['DK','PSK'],r:[[1,[['DKL',1],['PSKR',1]]]]},
+ '246' :{k:'PSKT',ar:.72,b:'PSK Schiebeflügel + ffl',a:['PSK','FF'],         r:[[1,[['PSKR',1],['FFL',1]]]]},
+ '248' :{k:'PSKT',ar:.72,b:'PSK ffl + Schiebeflügel',a:['FF','PSK'],         r:[[1,[['FFL',1],['PSKL',1]]]]}
+};
+const AUSF = ['DKL','DKR','DL','DR','K','FF','F','PSK','–'];
+/* generischen Typ-Token je Position seitenrichtig machen: erste Zelle = links, letzte = rechts */
+function sided(tok, idx, n){
+  if(tok==='DK') return (idx===n-1 && n>1) ? 'DKR' : 'DKL';
+  if(tok==='D')  return (idx===n-1 && n>1) ? 'DR'  : 'DL';
+  return tok;
+}
+
+/* ---- Systeme / Serien: Vario 6 (76 mm) · Vario 7 + Vario 8 (85 mm) ---- */
+const SPR_GLAS = ['618 18mm','626 26mm','645 45mm'];
+const SPR_AUF  = ['SPS25','SPS36','SPS45','SPS67'];
+const V85 = {
+  spr: ['Sp8043 104','Sp8044 104','Sp8046 70','Sp7041 84','Sp7044 104'].concat(SPR_GLAS,SPR_AUF),
+  verb:['80209 15/85','80201 35/85','80203 60/85','80204 100/85',
+        '40209 15/70','40205 35/70','40207 60/70','40208 100/70','40206 140/70',
+        '20220 15/60','20242 35/60','20221 60/60','20223 120/60',
+        'VWS 85-35','VWS 85-50','VWS 85-100','VWS 85-135'],
+  fba: ['7/140','8/107','9/107','10/87303+723..','FBA106 WD 40','FBA107 30','FBA140 35','FBA150 49 weiß',
+        'FBA20210 50','FBA20102 50','FBA20206 25','FBA40229 20','FBA20246 35','FBA20214 40 Transportsich.'],
+  rofu:['–','F101','F102 (RF930)','RF933','RF930','F102S','RF930+RF972','RG 109','F101G+F101H','Doppellaufnute AE','Rofü AE'],
+  abl: ['–','F061','F063','959','27301 45x20','27302 90x26','67501'],
+  kopp:'K20224 · K20116 · K40248 · K40249 · K80218/25 · K80218/37 · K60243+K40244',
+  schwelle:'SGU 8520 (Vario 6–8) · SGU BF 8530 barrierefrei · Wetterschenkel SGU BF 0010-007-0113 (V7) · Aluplast 267055'
+};
+const SYS = {
+ 'Vario 6 CUBEline':{
+   bt:'Rahmenbautiefe 76 mm (Flügelbautiefe 78 mm)', dicht:['AD','MD'],
+   dichtLbl:{AD:'CUBEline AD (Anschlagdichtung)', MD:'CUBEline MD (Mitteldichtung)'},
+   rahmen:{AD:['6001 73 mm'], MD:['6005 73 mm','6093 93 mm','6205 powerdur 73 mm (ohne Stahl im Std.)']},
+   fluegel:{AD:['6020 75 mm','6024 68 mm','6220 powerdur 75 mm','6030 110 mm NET i.ö.','6031 110 mm NET a.ö.'],
+            MD:['6020 75 mm','6024 68 mm','6220 powerdur 75 mm','6030 110 mm NET i.ö.','6031 110 mm NET a.ö.']},
+   spr:['6043 AD 114','6041 AD 94','6048 AD 70','6046 MD 114','6045 MD 94'].concat(SPR_GLAS,SPR_AUF),
+   verb:['60201 15','60202 35','60204 100','VWS 76-35','VWS 76-50','VWS 76-100','VWS 76-135',
+         'VWS 67-35','VWS 67-50','VWS 67-100','VWS 67-135'],
+   fba:['7/140','8/107+Entw.modul','9/107','10/67501+2730..','FBA106 WD 40','FBA107 30','FBA140 35',
+        'FBA20210 50','FBA20102 50','FBA20206 25','FBA40229 20','FBA20246 35'],
+   rofu:['–','F101','F102 (RF930)','RF933','F101S (RF930)','F102S (RF900N)','RG 109','RLF 101','Doppellaufnute AE'],
+   abl:['–','F061','F063','959','27301 45x20','27302 90x26','67501'],
+   stulp:'Stulp 6066 74 mm', kopp:'20224 · 40248 · 40249 · 60218/25 · 60218/37 · 60243+40244',
+   schwelle:'SGU 7620 · Aluplast Wetterschenkel 267055',
+   titel:'Bestellvordruck Kunststofffenster Vario 6 CUBEline'
+ },
+ 'K85 Vario 7 Classic Line':{
+   bt:'Bautiefe 85 mm', dicht:['AD'], dichtLbl:{AD:'K85 Vario 7 Anschlagdichtung (CL)'},
+   rahmen:{AD:['7003 80 mm']},
+   fluegel:{AD:['7020 77 mm','7030 97 mm NET H-Tür','7031 97 mm NET n.a.ö. H-Tür']},
+   spr:V85.spr, verb:V85.verb, fba:V85.fba, rofu:V85.rofu, abl:V85.abl,
+   stulp:'ST 7064 80x67 mm', kopp:V85.kopp, schwelle:V85.schwelle,
+   titel:'Bestellvordruck Kunststofffenster K85 Vario 7 Ad CLASSIC Line'
+ },
+ 'K85 Vario 8 Classic Line':{
+   bt:'Bautiefe 85 mm', dicht:['MD'], dichtLbl:{MD:'K85 Vario 8 Mitteldichtung CLASSIC Line (CL)'},
+   rahmen:{MD:['8005 80 mm CL']},
+   fluegel:{MD:['8020 77 mm CL (Norm)','8030 105 mm CL','8031 105 mm CL']},
+   spr:V85.spr, verb:V85.verb, fba:V85.fba, rofu:V85.rofu, abl:V85.abl,
+   kopp:V85.kopp, schwelle:V85.schwelle,
+   titel:'Bestellvordruck Kunststofffenster K85 Vario 8 Md CLASSIC Line'
+ },
+ 'K85 Vario 8 energeto PH':{
+   bt:'Bautiefe 85 mm · Ausführung mit Dämmkern', dicht:['MD'],
+   dichtLbl:{MD:'K85 Vario 8 energeto PH Mitteldichtung'},
+   rahmen:{MD:['8E05 80 mm (energeto PH)']},
+   fluegel:{MD:['8086 80 mm CL (energeto PH)']},
+   spr:V85.spr, verb:V85.verb, fba:V85.fba, rofu:V85.rofu, abl:V85.abl,
+   kopp:V85.kopp, schwelle:V85.schwelle,
+   titel:'Bestellvordruck Kunststofffenster K85 Vario 8 energeto PH'
+ }
+};
+const sys = ()=> SYS[D.kopf.serie] || SYS['Vario 6 CUBEline'];
+
+/* ---------------- SVG-Zeichner ---------------- */
+function svgType(id, maxW, maxH, ausf){
+  const t = TYPES[id];
+  if(!t) return '<svg width="'+maxW+'" height="'+maxH+'"><rect x="2" y="2" width="'+(maxW-4)+'" height="'+(maxH-4)+
+    '" fill="none" stroke="#c3cbd5" stroke-dasharray="4 3"/><text x="'+(maxW/2)+'" y="'+(maxH/2+4)+
+    '" font-size="11" fill="#98a2ae" text-anchor="middle">?</text></svg>';
+  let W = maxW, H = W*t.ar;
+  if(H > maxH){ H = maxH; W = H/t.ar; }
+  W = Math.round(W); H = Math.round(H);
+  const S = [], C = '#14356b';
+  const line=(x1,y1,x2,y2,w)=>S.push('<line x1="'+x1.toFixed(1)+'" y1="'+y1.toFixed(1)+'" x2="'+x2.toFixed(1)+
+      '" y2="'+y2.toFixed(1)+'" stroke="'+C+'" stroke-width="'+(w||1)+'"/>');
+  const rect=(x,y,w,h,sw)=>S.push('<rect x="'+x.toFixed(1)+'" y="'+y.toFixed(1)+'" width="'+w.toFixed(1)+
+      '" height="'+h.toFixed(1)+'" fill="none" stroke="'+C+'" stroke-width="'+(sw||1)+'"/>');
+
+  const fr = Math.max(3, W*0.035);                 // Blendrahmen
+  rect(1,1,W-2,H-2,1.6); rect(1+fr,1+fr,W-2-2*fr,H-2-2*fr,1);
+  const X0=1+fr, Y0=1+fr, CW=W-2-2*fr, CH=H-2-2*fr;
+
+  // Flügelfolge für Ausführungs-Override ermitteln (letzte/größte Reihe)
+  let mainRow = 0, best = -1;
+  t.r.forEach((rw,i)=>{ if(rw[1].length>best){best=rw[1].length; mainRow=i;} });
+
+  const tot = t.r.reduce((s,r)=>s+r[0],0);
+  let y = Y0;
+  t.r.forEach((rw,ri)=>{
+    const rh = CH*rw[0]/tot;
+    const wtot = rw[1].reduce((s,c)=>s+c[1],0);
+    let x = X0;
+    rw[1].forEach((cell,ci)=>{
+      const cw = CW*cell[1]/wtot;
+      let kind = cell[0];
+      const AMAP = {DKL:'DKL',DKR:'DKR',DL:'DL',DR:'DR',K:'K',FF:'FFL',F:'F',PSK:'PSKR'};
+      if(ausf && ri===mainRow){
+        const key = rw[1].length>1
+          ? (ci===0?ausf.l : (rw[1].length===2 ? ausf.r : (ci===1?ausf.m:ausf.r)))
+          : ausf.l;
+        if(key && AMAP[key]) kind = AMAP[key] + (cell[0].endsWith('S')?'S':'');
+      }
+      drawCell(x,y,cw,rh,kind);
+      if(ci>0) line(x,y,x,y+rh,1);
+      x += cw;
+    });
+    if(ri>0) line(X0,y,X0+CW,y,1);
+    y += rh;
+  });
+
+  function drawCell(x,y,w,h,kind){
+    const stulp = kind.endsWith('S');
+    const k = stulp ? kind.slice(0,-1) : kind;
+    if(k==='F'){                                   // Festverglasung im Blendrahmen
+      const p=Math.max(2,w*0.05);
+      line(x+p,y+p,x+w-p,y+h-p); line(x+w-p,y+p,x+p,y+h-p);
+      return;
+    }
+    const i1=Math.max(2,w*0.045), i2=i1+Math.max(1.6,w*0.035);
+    rect(x+i1,y+i1,w-2*i1,h-2*i1,1);
+    rect(x+i2,y+i2,w-2*i2,h-2*i2,.8);
+    const gx=x+i2+2, gy=y+i2+2, gw=w-2*i2-4, gh=h-2*i2-4;
+    if(gw<4||gh<4) return;
+    const tri=(pts)=>S.push('<polyline points="'+pts+'" fill="none" stroke="'+C+'" stroke-width=".9"/>');
+    if(k==='FFL'){
+      if(gw>26&&gh>12) S.push('<text x="'+(gx+gw/2)+'" y="'+(gy+gh/2+3.5)+'" font-size="'+
+        Math.min(10,gw*0.26)+'" font-weight="bold" fill="'+C+'" text-anchor="middle">ffl</text>');
+      else { line(gx,gy,gx+gw,gy+gh); line(gx+gw,gy,gx,gy+gh); }
+    }
+    if(k==='K'||k==='DKL'||k==='DKR')
+      tri(gx+','+(gy+gh)+' '+(gx+gw/2)+','+gy+' '+(gx+gw)+','+(gy+gh));
+    /* Bandseite = Basis des Dreiecks, Spitze = Griffseite (wie bewa-Typenblatt)
+       DKL/DL = Bänder links  -> Basis linke Kante, Spitze rechts
+       DKR/DR = Bänder rechts -> Basis rechte Kante, Spitze links */
+    if(k==='DKL'||k==='DL')
+      tri(gx+','+gy+' '+(gx+gw)+','+(gy+gh/2)+' '+gx+','+(gy+gh));
+    if(k==='DKR'||k==='DR')
+      tri((gx+gw)+','+gy+' '+gx+','+(gy+gh/2)+' '+(gx+gw)+','+(gy+gh));
+    if(k==='PSKR'||k==='PSKL'){
+      const my=gy+gh/2, a=Math.min(9,gw*0.2);
+      line(gx+gw*0.12,my,gx+gw*0.88,my,1.4);
+      if(k==='PSKR'){ line(gx+gw*0.88,my,gx+gw*0.88-a,my-a*0.5,1.4); line(gx+gw*0.88,my,gx+gw*0.88-a,my+a*0.5,1.4);}
+      else { line(gx+gw*0.12,my,gx+gw*0.12+a,my-a*0.5,1.4); line(gx+gw*0.12,my,gx+gw*0.12+a,my+a*0.5,1.4);}
+    }
+    if(stulp && gw>28) S.push('<text x="'+(gx+gw/2)+'" y="'+(gy+9)+'" font-size="'+Math.min(8,gw*0.2)+
+      '" font-weight="bold" fill="'+C+'" text-anchor="middle">Stulp</text>');
+  }
+  return '<svg width="'+W+'" height="'+H+'" viewBox="0 0 '+W+' '+H+'">'+S.join('')+'</svg>';
+}
+
+/* ==================================================================
+   2) DATENMODELL
+   ================================================================== */
+const D = {
+  kopf:{ vorgang:'Anfrage', montage:'ohne', bauart:'Altbau', lieferung:'Lieferanschrift',
+         system:'CUBEline MD', rahmen:'6205 powerdur 73 mm (ohne Stahl im Std.)', fluegel:['6024 68 mm'],
+         duebel:'6 mm', duebelLage:'n. innen versetzt', sicherheit:'', zubehoer:[],
+         serie:'Vario 6 CUBEline', dichtung:'MD',
+         rlPanzer:'–', rlProfil:'–', rlAntrieb:'', rlSet:[], massart:'Bestellmaße',
+         datum:new Date().toISOString().slice(0,10) },
+  pos:[]
+};
+let seq = 0;
+const newPos = ()=>({ id:++seq, lv:'', raum:'', typ:'', stueck:1, breite:'', hoehe:'',
+  l:'', m:'', r:'', beschlag:'', oberlicht:'', sprTyp:'', sprLage:'', glas:D.kopf.glasStd||'',
+  fba:'', fbaM:'', verb:'', vl:'', vr:'', vo:'', vu:'', rofu:'', abl:'',
+  rlL:'', rlEl:'', rlR:'', notiz:'', media:[] });
+const DEF_KOPF = JSON.parse(JSON.stringify(D.kopf));
+
+/* ==================================================================
+   3) KOPFDATEN-UI
+   ================================================================== */
+const MASSTXT = {
+ 'Bestellmaße':'Verbindliche Fertigungsmaße – Blendrahmenaußenmaß, bereits um Montagefuge/Abzüge bereinigt.',
+ 'Angebotsmaße':'Unverbindliche Maße für die Kalkulation – vor der Bestellung ist ein Fertigaufmaß nötig.'
+};
+function segHook(key){
+  if(key==='massart'){
+    const h=document.getElementById('massHint'); if(h) h.textContent = MASSTXT[D.kopf.massart]||'';
+    const b=document.getElementById('massBadge'); if(b) b.textContent = D.kopf.massart||'';
+    renderPos();
+  }
+}
+/* ---- System / Serie ---- */
+function renderSys(){
+  const s=sys(), k=D.kopf;
+  if(!s.dicht.includes(k.dichtung)) k.dichtung=s.dicht[0];
+  const rl=s.rahmen[k.dichtung]||[], fl=s.fluegel[k.dichtung]||[];
+  if(!rl.includes(k.rahmen)) k.rahmen=rl[0]||'';
+  if(!Array.isArray(k.fluegel)) k.fluegel=[];
+  k.fluegel=k.fluegel.filter(f=>fl.includes(f));
+  if(!k.fluegel.length && fl.length) k.fluegel=[fl[0]];
+  k.system=(s.dichtLbl&&s.dichtLbl[k.dichtung])||k.dichtung;
+
+  const sl=document.getElementById('serieLbl');
+  if(sl) sl.textContent='AUFMASS '+k.serie.toUpperCase();
+  document.getElementById('sysBox').innerHTML =
+   '<label class="f"><span>Serie / Bautiefe</span><div class="chips">'
+   + Object.keys(SYS).map(n=>'<button class="chip'+(k.serie===n?' on':'')+'" onclick="setSerie(\''+n+'\')">'
+       +n+'</button>').join('')+'</div></label>'
+   +'<div class="hint" style="margin-top:6px">'+esc(s.bt)
+     +(s.stulp?' · '+esc(s.stulp):'')+(s.schwelle?'<br>Schwellen: '+esc(s.schwelle):'')+'</div>'
+   +'<div class="grid g2" style="margin-top:12px">'
+     +'<label class="f"><span>Dichtungssystem</span><div class="seg">'
+       + s.dicht.map(d=>'<button class="'+(k.dichtung===d?'on':'')+'" onclick="setDicht(\''+d+'\')">'
+         +(s.dichtLbl[d]||d)+'</button>').join('')+'</div></label>'
+     +'<label class="f"><span>Blendrahmen</span><div class="chips">'
+       + rl.map(o=>'<button class="chip'+(k.rahmen===o?' on':'')+'" onclick="setRahmen(\''+o.replace(/'/g,"")+'\')">'
+         +o+'</button>').join('')+'</div></label>'
+   +'</div>'
+   +'<label class="f" style="margin-top:12px"><span>Flügel</span><div class="chips">'
+     + fl.map(o=>'<button class="chip'+(k.fluegel.includes(o)?' on':'')+'" onclick="togFluegel(\''+o.replace(/'/g,"")+'\')">'
+       +o+'</button>').join('')+'</div></label>';
+}
+function setSerie(n){ D.kopf.serie=n; renderSys(); renderPos(); }
+function setDicht(d){ D.kopf.dichtung=d; renderSys(); }
+function setRahmen(o){ D.kopf.rahmen=o; renderSys(); }
+function togFluegel(o){ const a=D.kopf.fluegel, i=a.indexOf(o); i<0?a.push(o):a.splice(i,1); renderSys(); }
+
+function initKopf(){
+  document.querySelectorAll('[data-k]').forEach(el=>{
+    el.value = D.kopf[el.dataset.k]!=null ? D.kopf[el.dataset.k] : '';
+    if(!el._b){ el._b=1; el.addEventListener('input',()=>{ D.kopf[el.dataset.k]=el.value; curName(); }); }
+  });
+  document.querySelectorAll('[data-seg]').forEach(seg=>{
+    const key=seg.dataset.seg;
+    seg.dataset.opts.split('|').forEach(o=>{
+      const b=document.createElement('button'); b.textContent=o;
+      if(D.kopf[key]===o) b.className='on';
+      b.onclick=()=>{ D.kopf[key]= (D.kopf[key]===o && o==='–')?'':o;
+        [...seg.children].forEach(c=>c.className=''); b.className='on'; segHook(key); };
+      seg.appendChild(b);
+    });
+  });
+  document.querySelectorAll('[data-chips]').forEach(box=>{
+    const key=box.dataset.chips, single=box.dataset.single==='1';
+    if(!single && !Array.isArray(D.kopf[key])) D.kopf[key]=[];
+    box.dataset.opts.split('|').forEach(o=>{
+      const b=document.createElement('button'); b.className='chip'; b.textContent=o;
+      const act=()=> single ? D.kopf[key]===o : D.kopf[key].includes(o);
+      if(act()) b.classList.add('on');
+      b.onclick=()=>{
+        if(single){ D.kopf[key] = D.kopf[key]===o?'':o; [...box.children].forEach(c=>c.classList.remove('on')); }
+        else { const i=D.kopf[key].indexOf(o); i<0?D.kopf[key].push(o):D.kopf[key].splice(i,1); }
+        b.classList.toggle('on', act());
+      };
+      box.appendChild(b);
+    });
+  });
+}
+
+/* ==================================================================
+   4) POSITIONEN-UI
+   ================================================================== */
+const F=(lbl,val,key,i,attr)=>'<label class="f"><span>'+lbl+'</span><input '+(attr||'type="text"')+
+  ' value="'+esc(val)+'" oninput="setP('+i+',\''+key+'\',this.value)"></label>';
+const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+function grpTog(i,k){ const p=D.pos[i]; p._g=p._g||{}; p._g[k]=!p._g[k]; renderPos(); }
+function grp(i,key,title,info,inner){
+  const o=(D.pos[i]._g||{})[key];
+  return '<div class="sub grph" onclick="grpTog('+i+',\''+key+'\')">'+title
+    +'<em>'+esc(info||'')+'</em><span>'+(o?'▲':'▼')+'</span></div>'
+    +'<div class="grpb"'+(o?'':' style="display:none"')+'>'+inner+'</div>';
+}
+function renderPos(){
+  const sy=window.scrollY;
+  const box=document.getElementById('posList');
+  if(!D.pos.length){ box.className=''; box.innerHTML='<div class="empty"><b>Noch keine Position erfasst</b><br>'+
+    'Unten auf <b>„＋ Position“</b> tippen – dann Typ wählen und Rahmenmaß eintragen.</div>'; sums(); return; }
+  if(isWide()){
+    if(sel>=D.pos.length) sel=D.pos.length-1; if(sel<0) sel=0;
+    box.className='wide';
+    box.innerHTML='<div class="plist">'+D.pos.map((p,i)=>listItem(p,i)).join('')+'</div>'
+      +'<div class="pdetail">'+posCard(D.pos[sel],sel,true)+'</div>';
+  } else {
+    box.className='';
+    box.innerHTML = D.pos.map((p,i)=>posCard(p,i)).join('');
+  }
+  sums(); markTarget(); window.scrollTo(0,sy);
+}
+let sel=0;
+const isWide=()=>window.matchMedia('(min-width:900px)').matches;
+function posTitle(p){ return (p.raum||'Ohne Raum') + (p.typ? ' · Typ '+p.typ : ''); }
+function posSub(p){ const t=TYPES[p.typ];
+  return (p.breite&&p.hoehe? p.breite+' × '+p.hoehe+' mm' : 'Maß fehlt') + ' · ' + p.stueck + ' Stk.' + (t? ' · '+t.b : ''); }
+function listItem(p,i){
+  const ok=p.typ&&p.breite&&p.hoehe, n=(p.media||[]).length;
+  return '<div class="pli'+(ok?'':' incomplete')+(i===sel?' on':'')+'" data-pi="'+i+'" onclick="selPos('+i+')">'
+    +'<div class="pos-num">'+(i+1)+'</div><div class="pos-mini">'+svgType(p.typ,40,34,{l:p.l,m:p.m,r:p.r})+'</div>'
+    +'<div class="pos-info"><b>'+esc(posTitle(p))+'</b><span>'+esc(posSub(p))+'</span></div>'
+    +(n?'<span class="ph">📷 '+n+'</span>':'')+'</div>';
+}
+function selPos(i){ sel=i; renderPos(); window.scrollTo({top:0}); }
+function posCard(p,i,force){
+  const t=TYPES[p.typ];
+  const ok = p.typ && p.breite && p.hoehe;
+  const title = posTitle(p), sub = posSub(p);
+  return '<div class="pos'+(ok?'':' incomplete')+((p._o||force)?' open':'')+'" id="pc'+i+'" data-pi="'+i+'">'
+   +'<div class="pos-head" onclick="'+(force?'':'toggle('+i+')')+'">'
+     +'<div class="pos-num">'+(i+1)+'</div>'
+     +'<div class="pos-mini">'+svgType(p.typ,50,42,{l:p.l,m:p.m,r:p.r})+'</div>'
+     +'<div class="pos-info"><b>'+esc(title)+'</b><span>'+esc(sub)+'</span></div>'
+     +'<button class="pos-caret">'+(p._o?'▲':'▼')+'</button></div>'
+   +'<div class="pos-body">'
+
+   +'<div class="sub">Typ &amp; Raum</div>'
+   +'<button class="typbtn" onclick="openTyp('+i+')"><div class="sk">'+svgType(p.typ,54,46,null)+'</div>'
+     +'<div><b>'+(p.typ? 'Typ '+p.typ : 'Typ wählen …')+'</b><small>'+(t?esc(t.b):'aus der bewa-Typenübersicht')+'</small></div>'
+     +'<div style="margin-left:auto;color:var(--muted)">›</div></button>'
+   +'<div class="grid g3" style="margin-top:11px">'
+     +F('Raum',p.raum,'raum',i)+F('LV-Pos.',p.lv,'lv',i)
+     +F('Stück',p.stueck,'stueck',i,'type="number" min="1" inputmode="numeric"')+'</div>'
+
+   +'<div class="sub">Rahmenmaß (mm) · '+esc(D.kopf.massart||'')+' – ohne Zusatzprofile / Rollladenelement</div>'
+   +'<div class="masse">'
+     +'<label class="f"><span>Breite</span><input type="text" inputmode="decimal" enterkeyhint="next" data-m="b" data-i="'+i+'" value="'+esc(p.breite)+
+        '" placeholder="0" oninput="setM('+i+',\'breite\',this)" onkeydown="massKey(event,'+i+',\'b\')" onfocus="this.select()"></label>'
+     +'<label class="f"><span>Höhe</span><input type="text" inputmode="decimal" enterkeyhint="next" data-m="h" data-i="'+i+'" value="'+esc(p.hoehe)+
+        '" placeholder="0" oninput="setM('+i+',\'hoehe\',this)" onkeydown="massKey(event,'+i+',\'h\')" onfocus="this.select()"></label></div>'
+   +'<div class="bt">Messgerät als Bluetooth-Tastatur: Feld antippen, messen – nach dem Wert springt die App automatisch Breite → Höhe → nächste Position.</div>'
+   +(warnMass(p)?'<div class="warnbox" style="margin-top:9px">'+warnMass(p)+'</div>':'')
+
+   +'<div class="sub">Ausführung + Teilung <span style="font-weight:600;text-transform:none">(von innen, links → rechts)</span></div>'
+   +'<div class="grid '+(nc(p)>2?'g3':(nc(p)===2?'g2':''))+'">'+keys(p).map(k=>
+       '<label class="f"><span>'+(nc(p)===1?'Ausführung':{l:'links',m:'mitte',r:'rechts'}[k])+'</span><div class="chips">'
+       + AUSF.map(a=>'<button class="chip sm'+(p[k]===a?' on':'')+'" onclick="setAusf('+i+',\''+k+'\',\''+a+'\')">'+a+'</button>').join('')
+       +'</div></label>').join('')+'</div>'
+   +'<div class="preview" style="margin-top:11px">'+svgType(p.typ,220,180,{l:p.l,m:p.m,r:p.r})+'</div>'
+
+   +grp(i,'a','Beschlag · Sprossen · Glas',
+      [p.beschlag,p.oberlicht,p.sprTyp,p.glas].filter(Boolean).join(' · '),
+    '<div class="grid g2">'
+     +F('Beschlag',p.beschlag,'beschlag',i)
+     +F('Oberl./Unterl. Teilung Höhe',p.oberlicht,'oberlicht',i,'type="text" inputmode="numeric"')
+     +F('Sprossen Typ',p.sprTyp,'sprTyp',i)
+     +F('Sprossen Lage',p.sprLage,'sprLage',i)+'</div>'
+   +'<label class="f" style="margin-top:11px"><span>Sprossen schnell wählen</span><div class="chips">'
+     + sys().spr
+       .map(s=>'<button class="chip sm'+(p.sprTyp===s?' on':'')+'" onclick="setP('+i+',\'sprTyp\',\''+s+'\',1)">'+s+'</button>').join('')
+     +'</div></label>'
+   +'<div style="margin-top:11px">'+F('Glasart',p.glas,'glas',i)+'</div>')
+
+   +grp(i,'b','Fensterbank · Verbreiterung',
+      [p.fba,p.verb,p.vl,p.vr,p.vo,p.vu].filter(Boolean).join(' · '),
+    '<div class="grid g2">'
+     +F('Fba Typ',p.fba,'fba',i)
+     +'<label class="f"><span>Fba Montage</span><div class="seg">'
+       +['mont.','lose'].map(o=>'<button class="'+(p.fbaM===o?'on':'')+'" onclick="togVal('+i+',\'fbaM\',\''+o+'\')">'
+         +o+'</button>').join('')+'</div></label>'
+     +'</div>'
+   +'<label class="f" style="margin-top:11px"><span>Fba schnell</span><div class="chips">'
+     + sys().fba
+       .map(s=>'<button class="chip sm'+(p.fba===s?' on':'')+'" onclick="setP('+i+',\'fba\',\''+s+'\',1)">'+s+'</button>').join('')
+     +'</div></label>'
+   +'<label class="f" style="margin-top:11px"><span>Verbreiterung</span><div class="chips">'
+     + sys().verb.map(s=>'<button class="chip sm'+(p.verb===s?' on':'')+'" onclick="togVal('+i+',\'verb\',\''+s+'\')">'
+       +s+'</button>').join('')+'</div></label>'
+   +'<div class="grid g3" style="margin-top:11px">'
+     +F('Verbr. links (l)',p.vl,'vl',i)+F('rechts (r)',p.vr,'vr',i)
+     +F('oben (o)',p.vo,'vo',i)+F('unten (u)',p.vu,'vu',i)+'</div>')
+
+   +grp(i,'c','Rollladen · Führung · Ablauf',
+      [p.rofu,p.abl,p.rlEl,p.rlL,p.rlR].filter(Boolean).join(' · '),
+    '<div class="grid g2">'
+     +'<label class="f"><span>Rollladenführung (Rofü)</span><div class="chips">'
+       + sys().rofu
+        .map(s=>'<button class="chip sm'+(p.rofu===s?' on':'')+'" onclick="setP('+i+',\'rofu\',\''+s+'\',1)">'+s+'</button>').join('')
+       +'</div></label>'
+     +'<label class="f"><span>Ablaufprofil (Abl.)</span><div class="chips">'
+       + sys().abl
+        .map(s=>'<button class="chip sm'+(p.abl===s?' on':'')+'" onclick="setP('+i+',\'abl\',\''+s+'\',1)">'+s+'</button>').join('')
+       +'</div></label></div>'
+   +'<div class="grid g3" style="margin-top:11px">'
+     +F('Rollladensetzmaß links',p.rlL,'rlL',i)
+     +F('Element / Nutmaß',p.rlEl,'rlEl',i)
+     +F('Rollladensetzmaß rechts',p.rlR,'rlR',i)+'</div>'
+   +'<label class="f" style="margin-top:11px"><span>Aufsatzelement schnell</span><div class="chips">'
+     +['AE 15 150','AE 18 180','AE 21 210','AE MAX 225','TM 240','TM 260','TM 300']
+      .map(s=>'<button class="chip sm'+(p.rlEl===s?' on':'')+'" onclick="setP('+i+',\'rlEl\',\''+s+'\',1)">'+s+'</button>').join('')
+     +'</div></label>')
+
+   +'<div class="sub">Fotos &amp; Skizzen'+((p.media||[]).length?' ('+p.media.length+')':'')+'</div>'
+   +'<div class="thumbs">'+(p.media||[]).map((id,k)=>{ const m=MEDIA.get(id);
+       return '<button class="thumb" onclick="openViewer('+i+','+k+')">'+(m?'<img src="'+m.data+'" alt="">':'')
+         +'<i>'+(m&&m.typ==='skizze'?'Skizze':'Foto')+'</i></button>'; }).join('')
+     +'<button class="mbtn" onclick="addFoto('+i+')"><span>📷</span>Foto</button>'
+     +'<button class="mbtn" onclick="newSketch('+i+')"><span>✏️</span>Skizze</button></div>'
+
+   +'<div class="sub">Notiz zur Position</div>'
+   +'<textarea oninput="setP('+i+',\'notiz\',this.value)" placeholder="Besonderheiten, Anschlagsituation, Altbau …">'+esc(p.notiz)+'</textarea>'
+
+   +'<div class="rowbtns"><button class="btn" onclick="dup('+i+')">⧉ Duplizieren</button>'
+     +'<button class="btn" onclick="move('+i+',-1)">↑</button><button class="btn" onclick="move('+i+',1)">↓</button>'
+     +'<button class="btn danger" style="margin-left:auto" onclick="del('+i+')">🗑 Löschen</button></div>'
+   +'</div></div>';
+}
+function nc(p){ const t=TYPES[p.typ]; if(!t) return 3;
+  return t.r.reduce((m,rw)=>Math.max(m,rw[1].length),1); }
+function keys(p){ const n=nc(p); return n===1?['l']:(n===2?['l','r']:['l','m','r']); }
+/* Ausführung spaltenrichtig ausgeben: einflügelige Elemente landen je nach
+   Bandseite in „links“ (DKL/DL/K/F/FF) oder in „rechts“ (DKR/DR) */
+function ausfCells(p){
+  if(nc(p)>1) return [p.l||'', p.m||'', p.r||''];
+  const v=p.l||'';
+  return /^(DKR|DR)$/.test(v) ? ['','',v] : [v,'',''];
+}
+function warnMass(p){
+  const b=+p.breite,h=+p.hoehe,w=[];
+  if(p.breite&&(b<300||b>4000)) w.push('Breite '+b+' mm prüfen');
+  if(p.hoehe&&(h<300||h>3000)) w.push('Höhe '+h+' mm prüfen');
+  return w.length? '⚠ '+w.join(' · ') : '';
+}
+function setP(i,k,v,re){ D.pos[i][k]=v; if(re) renderPos(); else {sums(); light(i);} }
+function togVal(i,k,v){ D.pos[i][k]= D.pos[i][k]===v?'':v; renderPos(); }
+function setAusf(i,k,v){ D.pos[i][k]= D.pos[i][k]===v?'':v; renderPos(); }
+function toggle(i){ D.pos[i]._o=!D.pos[i]._o; renderPos();
+  if(D.pos[i]._o) setTimeout(()=>document.getElementById('pc'+i).scrollIntoView({block:'start',behavior:'smooth'}),60); }
+function light(i){
+  const p=D.pos[i], ok=p.typ&&p.breite&&p.hoehe;
+  document.querySelectorAll('[data-pi="'+i+'"]').forEach(c=>{
+    c.classList.toggle('incomplete',!ok);
+    const b=c.querySelector('.pos-info b'), s=c.querySelector('.pos-info span');
+    if(b) b.textContent=posTitle(p); if(s) s.textContent=posSub(p);
+  });
+}
+function scrollToPos(i){ setTimeout(()=>{ const e=document.getElementById('pc'+i);
+  if(e) e.scrollIntoView({block:'start',behavior:'smooth'}); },60); }
+function addPos(){ const p=newPos(); p._o=true; p.glas=D.kopf.glasStd||''; D.pos.forEach(x=>x._o=false);
+  D.pos.push(p); sel=D.pos.length-1; show('pos'); renderPos(); scrollToPos(sel);
+  openTyp(D.pos.length-1); }
+function cloneNoMedia(p){ const c=JSON.parse(JSON.stringify(p)); c.id=++seq; c.media=[]; return c; }
+function dupLast(){ if(!D.pos.length) return addPos();
+  const c=cloneNoMedia(D.pos[D.pos.length-1]); c.raum=''; c._o=true;
+  D.pos.forEach(x=>x._o=false); D.pos.push(c); sel=D.pos.length-1; show('pos'); renderPos(); scrollToPos(sel); }
+function dup(i){ const c=cloneNoMedia(D.pos[i]); D.pos.splice(i+1,0,c); sel=i+1; renderPos(); }
+function del(i){
+  const n=(D.pos[i].media||[]).length;
+  if(!confirm('Position '+(i+1)+' wirklich löschen?'+(n?'\n('+n+' Foto/Skizze werden mit gelöscht)':''))) return;
+  (D.pos[i].media||[]).forEach(id=>delMedia(id));
+  D.pos.splice(i,1); if(sel>=i&&sel>0) sel--; renderPos(); touch(); }
+function move(i,d){ const j=i+d; if(j<0||j>=D.pos.length) return;
+  [D.pos[i],D.pos[j]]=[D.pos[j],D.pos[i]]; if(sel===i) sel=j; renderPos(); }
+
+/* ---------- Maßeingabe / Messgerät (Bluetooth-Tastatur) ---------- */
+function normMass(v){
+  const s=String(v||'').trim().toLowerCase().replace(/\s+/g,'');
+  if(!s) return '';
+  const n=parseFloat(s.replace(',','.').replace(/[^\d.]/g,''));
+  if(isNaN(n)) return v;
+  let mm;
+  if(/mm/.test(s)) mm=n;
+  else if(/cm/.test(s)) mm=n*10;
+  else if(/m$/.test(s)) mm=n*1000;
+  else if(n<10 && /[.,]/.test(s)) mm=n*1000;          // 1,234 bzw. 1.234 = Meter
+  else mm=n;
+  return String(Math.round(mm));
+}
+let burst={t:0,n:0,timer:null};
+function setM(i,k,el){
+  D.pos[i][k]=el.value; sums(); light(i);
+  // Messgeräte „tippen“ sehr schnell – erkennt die Eingabe und springt ohne Enter weiter
+  const now=performance.now();
+  burst.n = (now-burst.t<45) ? burst.n+1 : 1; burst.t=now;
+  clearTimeout(burst.timer);
+  if(burst.n>=3) burst.timer=setTimeout(()=>commitMass(i,el.dataset.m,true),350);
+}
+function massKey(e,i,w){
+  if(e.key==='Enter'||e.key==='Tab'){ e.preventDefault(); clearTimeout(burst.timer); commitMass(i,w,true); }
+}
+function commitMass(i,w,adv){
+  const k=w==='b'?'breite':'hoehe', p=D.pos[i]; if(!p) return;
+  p[k]=normMass(p[k]);
+  const el=document.querySelector('input[data-m="'+w+'"][data-i="'+i+'"]');
+  if(el){ el.value=p[k]; el.classList.add('hot'); setTimeout(()=>el.classList.remove('hot'),600); }
+  light(i); touch();
+  if(!adv) return;
+  if(w==='b'){ const h=document.querySelector('input[data-m="h"][data-i="'+i+'"]'); if(h) h.focus(); return; }
+  if(i+1<D.pos.length){
+    if(isWide()) sel=i+1; else { D.pos.forEach(x=>x._o=false); D.pos[i+1]._o=true; }
+    renderPos(); scrollToPos(i+1);
+    const b=document.querySelector('input[data-m="b"][data-i="'+(i+1)+'"]'); if(b) b.focus();
+  } else { renderPos(); if(document.activeElement) document.activeElement.blur(); }
+}
+document.addEventListener('focusout',e=>{ const el=e.target;
+  if(el && el.dataset && el.dataset.m && el.dataset.i!=null){
+    const i=+el.dataset.i, k=el.dataset.m==='b'?'breite':'hoehe';
+    if(D.pos[i] && D.pos[i][k]!==normMass(D.pos[i][k])){ D.pos[i][k]=normMass(D.pos[i][k]); el.value=D.pos[i][k]; light(i); touch(); }
+  }
+});
+function sums(){
+  document.getElementById('sumStk').textContent = D.pos.reduce((s,p)=>s+(+p.stueck||0),0);
+  document.getElementById('sumPos').textContent = D.pos.length;
+}
+
+/* ---------------- Typen-Modal ---------------- */
+let typIdx=null, typKat='Alle';
+function openTyp(i){ typIdx=i; document.getElementById('typFor').textContent='Position '+(i+1);
+  document.getElementById('typModal').classList.add('on'); drawKat(); drawGrid(); }
+function closeTyp(){ document.getElementById('typModal').classList.remove('on'); }
+function drawKat(){
+  const kats=['Alle','Fenster','Tür','PSKT'];
+  document.getElementById('katRow').innerHTML = kats.map(k=>
+    '<button class="chip'+(typKat===k?' on':'')+'" onclick="typKat=\''+k+'\';drawKat();drawGrid()">'+k+'</button>').join('');
+}
+function drawGrid(){
+  const cur = typIdx!=null ? D.pos[typIdx].typ : '';
+  const ord={'Fenster':0,'Tür':1,'PSKT':2};
+  document.getElementById('tGrid').innerHTML = Object.keys(TYPES)
+    .filter(id=>typKat==='Alle'||TYPES[id].k===typKat)
+    .sort((a,b)=> (ord[TYPES[a].k]-ord[TYPES[b].k]) || (+a - +b))
+    .map(id=>'<button class="tcard'+(cur===id?' on':'')+'" onclick="pickTyp(\''+id+'\')">'
+      +'<div class="sk">'+svgType(id,92,64,null)+'</div><b>'+id+'</b><small>'+TYPES[id].b+'</small></button>').join('');
+}
+function pickTyp(id){
+  const p=D.pos[typIdx]; p.typ=id;
+  const a=(TYPES[id].a||[]).map((t,ix,arr)=>sided(t,ix,arr.length));
+  p.l=a[0]||''; p.m=a.length>2?a[1]:''; p.r=a.length>1?a[a.length-1]:'';
+  closeTyp(); renderPos();
+}
+
+/* ---------------- Ansichten ---------------- */
+function show(v){
+  document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('on',b.dataset.v===v));
+  document.querySelectorAll('.view').forEach(s=>s.classList.toggle('on',s.id==='v-'+v));
+  document.body.classList.toggle('v-list', v==='list');
+  if(v==='ovw') renderOvw();
+  if(v==='list') { saveLocal(); renderList(); }
+  window.scrollTo({top:0});
+}
+document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>show(b.dataset.v));
+
+const COLS=[['Pos','#'],['lv','LV'],['typ','Typ'],['stueck','Stk'],['breite','Breite'],['hoehe','Höhe'],
+ ['l','links'],['m','mitte'],['r','rechts'],['beschlag','Beschlag'],['oberlicht','Oberl./Unterl.'],
+ ['sprTyp','Spr.Typ'],['sprLage','Lage'],['glas','Glasart'],['fba','Fba'],['verb','Verbr.'],
+ ['vl','l'],['vr','r'],['vo','o'],['vu','u'],['rofu','Rofü'],['abl','Abl.'],
+ ['rlL','Setzmaß li'],['rlEl','Element/Nutmaß'],['rlR','Setzmaß re']];
+function renderOvw(){
+  const t=document.getElementById('ovwTbl');
+  t.innerHTML='<tr><th>#</th><th>Raum</th><th>Typ</th><th>Stk</th><th>B × H</th><th>Ausführung</th><th>Glas</th><th>Rollladen</th><th>Fotos</th></tr>'
+   + D.pos.map((p,i)=>'<tr><td>'+(i+1)+'</td><td>'+esc(p.raum)+'</td><td>'+esc(p.typ)+'</td><td>'+esc(p.stueck)
+     +'</td><td>'+esc(p.breite)+' × '+esc(p.hoehe)+'</td><td>'+[p.l,p.m,p.r].filter(Boolean).join(' / ')
+     +'</td><td>'+esc(p.glas)+'</td><td>'+esc([p.rlEl,p.rofu].filter(Boolean).join(' / '))+'</td><td>'+((p.media||[]).length||'')+'</td></tr>').join('');
+  const bad=[];
+  if(!D.kopf.kunde) bad.push('Kunde fehlt');
+  if(!D.kopf.kommission) bad.push('Kommission fehlt');
+  if(!D.pos.length) bad.push('keine Position erfasst');
+  D.pos.forEach((p,i)=>{ const m=[]; if(!p.typ)m.push('Typ'); if(!p.breite)m.push('Breite'); if(!p.hoehe)m.push('Höhe');
+    if(!p.raum)m.push('Raum'); if(m.length) bad.push('Pos. '+(i+1)+': '+m.join(', ')+' fehlt'); });
+  document.getElementById('checks').innerHTML = bad.length
+    ? '<div class="warnbox"><b>Noch offen ('+bad.length+'):</b><br>'+bad.join('<br>')+'</div>'
+    : '<div class="okbox"><b>✓ Aufmaß vollständig</b> – '+D.pos.length+' Positionen, '
+      + D.pos.reduce((s,p)=>s+(+p.stueck||0),0)+' Stück.</div>';
+}
+
+/* ==================================================================
+   5) EXPORT: PDF-Druckansicht im bewa-plast Bestellvordruck-Layout
+   ================================================================== */
+const CB=(on)=>on?'☒':'☐';
+function pHead(blatt,von){
+  const k=D.kopf;
+  return '<div class="pbar">'+esc(sys().titel)+'</div>'
+  +'<div class="phead">'
+   +'<div class="plogo"><div class="bn">bewa-plast</div><div class="bs">FENSTERTECHNIK</div>'
+     +'<div class="ad"><b>Beck GmbH Fenstertechnik</b><br>Kirchstraße 19 | 35794 Mengerskirchen<br>'
+     +'Tel.: 06476 / 9130-0 | Fax: 06476 / 570<br>www.bewa-plast.de</div></div>'
+   +'<div style="width:46mm">'+CB(k.vorgang==='Bestellung')+' Bestellung &nbsp; '+CB(k.vorgang==='Anfrage')+' Anfrage<br><br>'
+     +'<b>Blatt '+blatt+' von '+von+'</b><br><br>Montage: '+CB(k.montage==='mit')+' mit &nbsp;'+CB(k.montage==='ohne')+' ohne<br>'
+     +CB(k.bauart==='Neubau')+' Neubau &nbsp;'+CB(k.bauart==='Altbau')+' Altbau<br><br>'
+     +'<b>'+CB(k.massart==='Bestellmaße')+' Bestellmaße &nbsp; '+CB(k.massart==='Angebotsmaße')+' Angebotsmaße</b></div>'
+   +'<div style="flex:1"><span class="plab">Kunde:</span>'
+     +'<div class="pf"><u style="min-width:60mm">'+esc(k.kunde||'')+'</u></div>'
+     +'<div class="pf"><u style="min-width:60mm">'+esc(k.strasse||'')+'</u></div>'
+     +'<div class="pf"><u style="min-width:60mm">'+esc(k.ort||'')+'</u></div></div>'
+   +'<div style="width:52mm"><span class="plab">Kommission:</span><div class="pf"><u>'+esc(k.kommission||'')+'</u></div>'
+     +'<span class="plab">Bauvorhaben:</span><div class="pf"><u>'+esc(k.bv||'')+'</u></div>'
+     +'<span class="plab">Datum:</span><div class="pf"><u>'+esc(k.datum||'')+'</u></div></div>'
+   +'<div style="width:44mm"><span class="plab">Auftr.-Nr.:</span><div class="pf"><u style="min-width:34mm">'
+     +esc(k.auftrnr||'')+'</u></div><span class="plab">angestrebte Liefer-KW:</span><div class="pf"><u style="min-width:34mm">'
+     +esc(k.lieferkw||'')+'</u></div><span class="plab">Aufmaß:</span><div class="pf"><u style="min-width:34mm">'
+     +esc(k.monteur||'')+'</u></div></div>'
+  +'</div>';
+}
+function sheet1(von){
+  const k=D.kopf, s=sys(), has=(arr,v)=>Array.isArray(arr)&&arr.includes(v);
+  return '<div class="sheetpg">'+pHead(1,von)
+   +'<div class="pbox" style="text-align:center;font-weight:bold">Kunststofffenster '+esc(k.serie)+' · '+esc(s.bt)
+     +' &nbsp;&nbsp;&nbsp;'+s.dicht.map(d=>CB(k.dichtung===d)+' '+esc(s.dichtLbl[d]||d)).join(' &nbsp;&nbsp; ')+'</div>'
+   +'<div class="pcols" style="border:1px solid #14356b;border-top:0">'
+     +'<div><b>Blendrahmen / Flügel</b><div class="pl">'
+       +(s.rahmen[k.dichtung]||[]).map(o=>CB(k.rahmen===o)+' '+esc(o)).join('<br>')+'<br>'
+       +(s.fluegel[k.dichtung]||[]).map(o=>CB(has(k.fluegel,o))+' Flügel '+esc(o)).join('<br>')
+       +(s.stulp?'<br><span style="font-size:6.5px">'+esc(s.stulp)+'</span>':'')+'</div></div>'
+     +'<div><b>Dekore</b><div class="pl">Innen: <u>'+esc(k.farbeInnen||'')+'</u><br>Außen: <u>'+esc(k.farbeAussen||'')+'</u><br>'
+       +'Glasart Standard: <u>'+esc(k.glasStd||'')+'</u><br><br>'
+       +'<span style="font-size:6.5px">Dichtungen: Fenster foliert schwarz / Fenster weiß: grau</span></div></div>'
+     +'<div><b>Dübellochbohrung</b><div class="pl">'+CB(k.duebel==='6 mm')+' 6 mm &nbsp; '+CB(k.duebel==='10 mm')+' 10 mm<br>'
+       +'Lage: <u>'+esc(k.duebelLage||'')+'</u><br><br><b>Zubehör</b><br>'
+       +(k.zubehoer&&k.zubehoer.length? k.zubehoer.map(z=>'☒ '+esc(z)).join('<br>') : '–')+'</div></div>'
+     +'<div><b>Beschlag</b><div class="pl">Sicherheitsstufe: <u>'+esc(k.sicherheit||'')+'</u><br><br>'
+       +'<b>Lieferung</b><br>'+esc(k.lieferung||'')+'</div></div>'
+     +'<div><b>Rollladenpanzer</b><div class="pl">'+CB(/PVC/.test(k.rlTyp||''))+' PVC &nbsp; '
+       +CB(/ALU/.test(k.rlTyp||''))+' ALU &nbsp; '
+       +CB(/Mini/.test(k.rlTyp||''))+' Mini &nbsp; '+CB(/Maxi/.test(k.rlTyp||''))+' Maxi<br>'
+       +'Typ: <u>'+esc(k.rlTyp||'')+'</u><br>Farbe: <u>'+esc(k.rlFarbe||'')+'</u><br>'
+       +'Aufhängung: <u>'+esc(k.rlAufhaengung||'')+'</u><br>Endleiste: <u>'+esc(k.rlEndleiste||'')+'</u><br>'
+       +'Antrieb: <u>'+esc(k.rlAntrieb||'')+'</u></div></div>'
+   +'</div>'
+   +'<div class="pbox"><b>Sonstiges:</b><div style="min-height:14mm;white-space:pre-wrap">'+esc(k.sonstiges||'')+'</div></div>'
+   +'<div class="pbox" style="text-align:right;font-weight:bold">Gesamtstückzahl Fenster: '
+     + D.pos.reduce((s,p)=>s+(+p.stueck||0),0)+' &nbsp;·&nbsp; Positionen: '+D.pos.length+'</div>'
+   +'<div class="pfoot">Sämtliche Maße dieses Aufmaßes sind <u>'+esc(k.massart||'')+'</u>'
+     +(k.massart==='Angebotsmaße'?' – vor Fertigung ist ein verbindliches Fertigaufmaß erforderlich!':'')+'<br>'
+     +'Alle Elemente von innen und von links nach rechts gesehen. '
+     +'Blendrahmenaußenmaße ohne Zusatzprofile und ohne Rollladenelement!<br>'
+     +'Für sämtliche Aufträge gelten unsere allgemeinen Lieferungs- und Zahlungsbedingungen</div></div>';
+}
+function tblSheet(rows, startIdx, blatt, von){
+  const th = '<tr>'
+   +'<th style="width:7mm">Pos.</th><th style="width:8mm">LV Pos.</th><th style="width:11mm">Typ</th>'
+   +'<th style="width:8mm">Stück</th><th style="width:13mm">'+esc(D.kopf.massart||'Rahmenmaß')+'<br>Breite (mm)</th>'
+   +'<th style="width:13mm">'+esc(D.kopf.massart||'Rahmenmaß')+'<br>Höhe (mm)</th>'
+   +'<th style="width:11mm">links</th><th style="width:11mm">mitte</th><th style="width:11mm">rechts</th>'
+   +'<th style="width:10mm">Beschlag</th><th style="width:14mm">Oberl./Unterl.<br>Teilung Höhe</th>'
+   +'<th style="width:13mm">Sprossen<br>Typ</th><th style="width:11mm">Lage</th>'
+   +'<th style="width:20mm">Glasart</th><th style="width:14mm">Fba<br>Typ</th>'
+   +'<th style="width:14mm">Verbreiterung<br>Typ</th><th style="width:6mm">l</th><th style="width:6mm">r</th>'
+   +'<th style="width:6mm">o</th><th style="width:6mm">u</th>'
+   +'<th style="width:12mm">'+(D.kopf.serie==='Vario 6 CUBEline'?'Rofü':'Rf')+'<br>Typ</th><th style="width:12mm">Abl.<br>Typ</th>'
+   +'<th style="width:9mm">Setzmaß<br>links</th><th style="width:20mm">Rollladen-<br>element o. Nutmaß</th>'
+   +'<th style="width:9mm">Setzmaß<br>rechts</th></tr>';
+  const tr = rows.map((p,n)=>{
+    const i=startIdx+n;
+    const c=v=>'<td>'+esc(v||'')+'</td>';
+    return (p.raum||p.notiz ? '<tr><td colspan="25" class="lft" style="height:5mm;font-size:7.5px;background:#e9edf4">'
+         +'<b>Raum: '+esc(p.raum||'–')+'</b>'+(p.notiz?' &nbsp;|&nbsp; Hinweis: '+esc(p.notiz):'')+'</td></tr>' : '')
+      + '<tr'+(n%2?' class="z"':'')+'><td><b>'+(i+1)+'</b></td>'+c(p.lv)+'<td><b>'+esc(p.typ)+'</b></td>'
+      +c(p.stueck)+'<td><b>'+esc(p.breite)+'</b></td><td><b>'+esc(p.hoehe)+'</b></td>'
+      +ausfCells(p).map(c).join('')+c(p.beschlag)+c(p.oberlicht)+c(p.sprTyp)+c(p.sprLage)
+      +'<td class="lft" style="font-size:7px">'+esc(p.glas)+'</td>'+c(p.fba)+c(p.verb)
+      +c(p.vl)+c(p.vr)+c(p.vo)+c(p.vu)+c(p.rofu)+c(p.abl)+c(p.rlL)+c(p.rlEl)+c(p.rlR)+'</tr>';
+  }).join('');
+  const fill = Array(Math.max(0, 8-rows.length)).fill('<tr>'+Array(25).fill('<td>&nbsp;</td>').join('')+'</tr>').join('');
+  return '<div class="sheetpg">'+pHead(blatt,von)
+   +'<div class="psys">'+esc(D.kopf.serie)+' · '+esc(sys().dichtLbl[D.kopf.dichtung]||D.kopf.dichtung)
+     +' &nbsp;|&nbsp; Blendrahmen '+esc(D.kopf.rahmen||'–')+' &nbsp;|&nbsp; Flügel '
+     +esc((D.kopf.fluegel||[]).join(', ')||'–')+' &nbsp;|&nbsp; Maße: '+esc(D.kopf.massart||'')+'</div>'
+   +'<table class="ptbl">'+th+tr+fill+'</table>'
+   +'<div class="pfoot">Alle Elemente von innen und von links nach rechts gesehen. '
+   +'Blendrahmenaußenmaße ohne Zusatzprofile und ohne Rollladenelement!<br>'
+   +'Für sämtliche Aufträge gelten unsere allgemeinen Lieferungs- und Zahlungsbedingungen</div></div>';
+}
+function skSheet(rows,startIdx,blatt,von){
+  return '<div class="sheetpg">'+pHead(blatt,von)
+   +'<div class="pbox" style="font-weight:bold;text-align:center">Skizzenübersicht – Ansicht von innen · Maße = '
+     +esc(D.kopf.massart||'')+'</div>'
+   +'<div class="skgrid">'+rows.map((p,n)=>{
+      const i=startIdx+n, t=TYPES[p.typ];
+      return '<div class="skitem"><div class="skh">Pos. '+(i+1)+' · '+esc(p.raum||'–')+'</div>'
+        +'<div class="skb">'+svgType(p.typ,120,86,{l:p.l,m:p.m,r:p.r})+'</div>'
+        +'<div class="skf"><b>'+esc(p.breite||'?')+' × '+esc(p.hoehe||'?')+' mm</b> · '+esc(p.stueck)+' Stk.<br>'
+        +'Typ '+esc(p.typ||'–')+(t?' – '+esc(t.b):'')+'<br>'
+        +[p.l,p.m,p.r].filter(Boolean).join(' / ')+'</div></div>';
+    }).join('')+'</div>'
+   +'<div class="pfoot">Alle Elemente von innen und von links nach rechts gesehen.</div></div>';
+}
+function buildPrint(){
+  const per=8, n=Math.max(1,Math.ceil(D.pos.length/per));
+  const sper=8, sn=D.pos.length?Math.ceil(D.pos.length/sper):0;
+  const fotos=[];
+  const cb=document.getElementById('pdfFotos');
+  if(!cb || cb.checked) D.pos.forEach((p,i)=>(p.media||[]).forEach(id=>{ const m=MEDIA.get(id); if(m) fotos.push({i,p,m}); }));
+  const fper=6, fn=Math.ceil(fotos.length/fper);
+  const von=1+n+sn+fn, out=[sheet1(von)];
+  for(let i=0;i<n;i++) out.push(tblSheet(D.pos.slice(i*per,(i+1)*per), i*per, i+2, von));
+  for(let i=0;i<sn;i++) out.push(skSheet(D.pos.slice(i*sper,(i+1)*sper), i*sper, n+2+i, von));
+  for(let i=0;i<fn;i++) out.push('<div class="sheetpg">'+pHead(n+sn+2+i,von)
+    +'<div class="pbox" style="font-weight:bold;text-align:center">Fotos &amp; Skizzen</div><div class="phgrid">'
+    +fotos.slice(i*fper,(i+1)*fper).map(f=>'<div class="phitem"><div class="skh">Pos. '+(f.i+1)+' · '+esc(f.p.raum||'–')
+      +' · '+(f.m.typ==='skizze'?'Skizze':'Foto')+(f.p.breite&&f.p.hoehe?' · '+esc(f.p.breite)+' × '+esc(f.p.hoehe)+' mm':'')
+      +'</div><div class="phb"><img src="'+f.m.data+'"></div></div>').join('')
+    +'</div></div>');
+  document.getElementById('print').innerHTML = out.join('');
+}
+async function doPrint(){
+  buildPrint();
+  const imgs=[...document.querySelectorAll('#print img')];
+  await Promise.all(imgs.map(im=>im.decode?im.decode().catch(()=>{}):Promise.resolve()));
+  if(NATIVE){   // AirPrint-Dialog der App: dort „Teilen → In Dateien sichern“ für PDF
+    document.body.classList.add('printing');
+    try{ await NPrint.printPage({name:fileName('pdf')}); }
+    catch(e){ alert('Drucken nicht möglich: '+(e&&e.message||e)); }
+    finally{ document.body.classList.remove('printing'); }
+    return;
+  }
+  setTimeout(()=>window.print(),120);
+}
+
+/* ---------------- Sichern / Laden / Text ---------------- */
+function exportObj(){
+  const media=[];
+  D.pos.forEach(p=>(p.media||[]).forEach(id=>{ const m=MEDIA.get(id);
+    if(m) media.push({id:m.id,typ:m.typ,data:m.data,t:m.t}); }));
+  return {v:6,kopf:D.kopf,pos:D.pos.map(stripPos),seq:seq,media:media};
+}
+function saveJSON(){
+  if(NATIVE){ nativeShareFile(fileName('json'),JSON.stringify(exportObj()))
+    .catch(e=>alert('Sichern nicht möglich: '+(e&&e.message||e))); return; }
+  const blob=new Blob([JSON.stringify(exportObj())],{type:'application/json'});
+  const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=fileName('json');
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(()=>URL.revokeObjectURL(a.href),3000);
+}
+document.getElementById('loadFile').addEventListener('change',e=>{
+  const f=e.target.files[0]; if(!f) return;
+  const rd=new FileReader();
+  rd.onload=async()=>{ let j;
+    try{ j=JSON.parse(rd.result); }catch(err){ alert('Datei konnte nicht gelesen werden.'); return; }
+    try{ await saveLocal(true); await importAufmass(j); show('kopf');
+      alert('Aufmaß geladen: '+D.pos.length+' Positionen. Es wurde als neues Aufmaß angelegt.');
+    }catch(err){ alert('Aufmaß konnte nicht gespeichert werden.'); } };
+  rd.readAsText(f); e.target.value='';
+});
+function buildText(){
+  const k=D.kopf;
+  let t='AUFMASS – bewa-plast '+(k.serie||'')+'\n'+(k.vorgang||'')+' · '+(k.massart||'')
+   +'\nKunde: '+(k.kunde||'')+'\nKommission: '
+   +(k.kommission||'')+'\nBV: '+(k.bv||'')+'\nDatum: '+(k.datum||'')+'\nSystem: '+(k.system||'')+' / '+(k.rahmen||'')
+   +' / '+((k.fluegel||[]).join(', '))+'\n\n';
+  D.pos.forEach((p,i)=>{ t+='Pos. '+(i+1)+' | '+(p.raum||'-')+' | Typ '+(p.typ||'-')+' | '+p.stueck+' Stk | '
+    +(p.breite||'?')+' x '+(p.hoehe||'?')+' mm | '+[p.l,p.m,p.r].filter(Boolean).join('/')
+    +(p.glas?' | Glas: '+p.glas:'')+(p.sprTyp?' | Spr.: '+p.sprTyp+' '+p.sprLage:'')
+    +(p.fba?' | Fba: '+p.fba:'')+(p.verb?' | Verbr.: '+p.verb:'')
+    +(p.rofu?' | Rofü: '+p.rofu:'')+(p.rlEl?' | RL: '+p.rlEl:'')+(p.notiz?'\n     Hinweis: '+p.notiz:'')+'\n'; });
+  t+='\nGesamt: '+D.pos.reduce((s,p)=>s+(+p.stueck||0),0)+' Stück / '+D.pos.length+' Positionen.';
+  return t;
+}
+function copyText(){
+  const t=buildText();
+  if(navigator.clipboard) navigator.clipboard.writeText(t).then(()=>alert('Aufmaß in die Zwischenablage kopiert.'),
+    ()=>prompt('Text markieren und kopieren:',t));
+  else prompt('Text markieren und kopieren:',t);
+}
+/* ==================================================================
+   6) AUTOMATISCHES SPEICHERN AUF DEM GERÄT
+   ================================================================== */
+/* ---- IndexedDB: Speicher für viele Aufmaße + Fotos (localStorage wäre für Fotos zu klein) ---- */
+const OLD_STORE='bewaAufmass.v1', CUR='bewaAufmass.aktuell';
+let DB=null, saveTimer=null, lastSaved='';
+const MEDIA=new Map();
+const newId=p=>(p||'a')+Date.now().toString(36)+Math.random().toString(36).slice(2,7);
+const today=()=>new Date().toISOString().slice(0,10);
+const clone=o=>JSON.parse(JSON.stringify(o));
+function dbOpen(){ return new Promise((res,rej)=>{
+  if(!window.indexedDB) return rej(new Error('kein IndexedDB'));
+  const r=indexedDB.open('bewaAufmass',1);
+  r.onupgradeneeded=()=>{ const db=r.result;
+    if(!db.objectStoreNames.contains('aufmasse')) db.createObjectStore('aufmasse',{keyPath:'id'});
+    if(!db.objectStoreNames.contains('media')) db.createObjectStore('media',{keyPath:'id'}).createIndex('aid','aid'); };
+  r.onsuccess=()=>res(r.result); r.onerror=()=>rej(r.error); }); }
+function tx(store,mode,fn){ return new Promise((res,rej)=>{
+  const t=DB.transaction(store,mode), r=fn(t.objectStore(store));
+  t.oncomplete=()=>res(r?r.result:undefined); t.onerror=()=>rej(t.error); t.onabort=()=>rej(t.error); }); }
+const dbPut=(st,v)=>tx(st,'readwrite',s=>s.put(v));
+const dbGet=(st,k)=>tx(st,'readonly',s=>s.get(k));
+const dbDel=(st,k)=>tx(st,'readwrite',s=>s.delete(k));
+const dbAll=st=>tx(st,'readonly',s=>s.getAll());
+const dbByAid=aid=>tx('media','readonly',s=>s.index('aid').getAll(aid));
+
+function stamp(){ const d=new Date(); return ('0'+d.getHours()).slice(-2)+':'+('0'+d.getMinutes()).slice(-2); }
+function info(h){ const el=document.getElementById('savedInfo'); if(el) el.innerHTML=h; }
+function stripPos(p){ const c=Object.assign({},p); delete c._o; delete c._g; return c; }
+function curName(){ const el=document.getElementById('curName'); if(el) el.textContent=D.kopf.kommission||D.kopf.kunde||''; }
+
+async function saveLocal(force){
+  if(!DB||!D.id) return;
+  const pos=D.pos.map(stripPos), snap=JSON.stringify([D.kopf,pos]);
+  if(snap===lastSaved && !force) return;
+  try{
+    await dbPut('aufmasse',{id:D.id,kopf:D.kopf,pos:pos,seq:seq,t:Date.now(),c:D.c||Date.now()});
+    lastSaved=snap; info('gespeichert <b>'+stamp()+'</b>');
+  }catch(e){ info('Speichern nicht möglich'); }
+}
+function touch(){ clearTimeout(saveTimer); saveTimer=setTimeout(()=>saveLocal(),500); }
+
+function refreshAll(){
+  document.querySelectorAll('[data-seg],[data-chips]').forEach(el=>el.innerHTML='');
+  initKopf(); renderSys(); segHook('massart'); renderPos(); renderOvw(); curName();
+}
+async function openAufmass(id){
+  const rec=await dbGet('aufmasse',id); if(!rec) return false;
+  D.id=rec.id; D.c=rec.c;
+  D.kopf=Object.assign(clone(DEF_KOPF),{datum:today()},rec.kopf||{});
+  D.pos=(rec.pos||[]).map(x=>Object.assign(newPos(),x,{_o:false}));
+  seq=Math.max(rec.seq||0,D.pos.length);
+  MEDIA.clear(); (await dbByAid(id)).forEach(m=>MEDIA.set(m.id,m));
+  sel=0; lastSaved=JSON.stringify([D.kopf,D.pos.map(stripPos)]);
+  try{ localStorage.setItem(CUR,id); }catch(e){}
+  refreshAll(); info('geöffnet <b>'+stamp()+'</b>');
+  return true;
+}
+async function createAufmass(keep){
+  const rec={id:newId(),kopf:Object.assign(clone(DEF_KOPF),{datum:today()},keep||{}),pos:[],seq:0,t:Date.now(),c:Date.now()};
+  await dbPut('aufmasse',rec); await openAufmass(rec.id);
+}
+async function neuesAufmass(){
+  if(!DB){ alert('Auf diesem Gerät kann nicht gespeichert werden.'); return; }
+  await saveLocal(true);
+  const k=D.kopf, keep={serie:k.serie, dichtung:k.dichtung, rahmen:k.rahmen, fluegel:(k.fluegel||[]).slice(),
+    glasStd:k.glasStd, farbeInnen:k.farbeInnen, farbeAussen:k.farbeAussen, mailTo:k.mailTo, monteur:k.monteur};
+  await createAufmass(keep); show('kopf');
+}
+async function importAufmass(j){
+  const id=newId(), map={};
+  for(const m of (j.media||[])){ const nid=newId('m'); map[m.id]=nid;
+    await dbPut('media',{id:nid,aid:id,typ:m.typ||'foto',data:m.data,t:m.t||Date.now()}); }
+  const pos=(j.pos||[]).map(p=>Object.assign({},p,{media:(p.media||[]).map(x=>map[x]).filter(Boolean)}));
+  await dbPut('aufmasse',{id,kopf:Object.assign(clone(DEF_KOPF),j.kopf||{}),pos,seq:j.seq||pos.length,t:Date.now(),c:Date.now()});
+  await openAufmass(id);
+}
+async function openFromList(id){ await saveLocal(true); await openAufmass(id); show(D.pos.length?'pos':'kopf'); }
+async function copyAufmass(id){
+  await saveLocal(true);
+  const r=await dbGet('aufmasse',id); if(!r) return;
+  const n={id:newId(),kopf:Object.assign({},r.kopf,{kommission:(r.kopf.kommission||'')+' (Kopie)',datum:today()}),
+    pos:(r.pos||[]).map(p=>Object.assign({},p,{media:[]})),seq:r.seq,t:Date.now(),c:Date.now()};
+  await dbPut('aufmasse',n); renderList();
+}
+async function delAufmass(id){
+  const r=await dbGet('aufmasse',id); if(!r) return;
+  const name=r.kopf.kommission||r.kopf.kunde||'ohne Namen';
+  if(!confirm('Aufmaß „'+name+'“ mit '+(r.pos||[]).length+' Positionen und allen Fotos endgültig löschen?\n\nDas kann nicht rückgängig gemacht werden.')) return;
+  for(const m of await dbByAid(id)) await dbDel('media',m.id);
+  await dbDel('aufmasse',id);
+  if(id===D.id){
+    const all=(await dbAll('aufmasse')).sort((a,b)=>(b.t||0)-(a.t||0));
+    if(all.length) await openAufmass(all[0].id); else await createAufmass();
+  }
+  renderList();
+}
+async function renderList(){
+  const box=document.getElementById('aList'); if(!box) return;
+  if(!DB){ box.innerHTML='<div class="warnbox">Speichern ist auf diesem Gerät nicht möglich (privater Modus?).</div>'; return; }
+  const all=(await dbAll('aufmasse')).sort((a,b)=>(b.t||0)-(a.t||0));
+  const q=(document.getElementById('aSearch').value||'').toLowerCase().trim();
+  const rows=all.filter(r=>{ const k=r.kopf||{};
+    return !q || [k.kunde,k.kommission,k.bv,k.ort,k.strasse,k.auftrnr].join(' ').toLowerCase().includes(q); });
+  box.innerHTML = rows.length ? rows.map(r=>{
+    const k=r.kopf||{}, pos=r.pos||[], stk=pos.reduce((s,p)=>s+(+p.stueck||0),0),
+      fot=pos.reduce((s,p)=>s+((p.media||[]).length),0), cur=r.id===D.id,
+      dt=new Date(r.t||0);
+    return '<div class="acard'+(cur?' cur':'')+'">'
+      +'<b>'+esc(k.kommission||k.kunde||'Ohne Namen')+'</b>'
+      +'<div class="meta">'+esc([k.kommission?k.kunde:'',k.bv,k.ort].filter(Boolean).join(' · ')||'–')+'</div>'
+      +'<div><span class="tag">'+esc(k.serie||'')+'</span><span class="tag'+(k.massart==='Angebotsmaße'?' o':'')+'">'
+        +esc(k.massart||'')+'</span><span class="tag">'+esc(k.vorgang||'')+'</span></div>'
+      +'<div class="meta">'+pos.length+' Pos. · '+stk+' Stk.'+(fot?' · 📷 '+fot:'')+' · Aufmaß '+esc(k.datum||'')
+        +'<br>zuletzt geändert '+dt.toLocaleDateString('de-DE')+' '+('0'+dt.getHours()).slice(-2)+':'+('0'+dt.getMinutes()).slice(-2)
+        +(cur?' · <b style="color:var(--orange)">geöffnet</b>':'')+'</div>'
+      +'<div class="rowbtns"><button class="btn primary" onclick="openFromList(\''+r.id+'\')">Öffnen</button>'
+        +'<button class="btn" onclick="copyAufmass(\''+r.id+'\')">⧉ Kopie</button>'
+        +'<button class="btn danger" style="margin-left:auto" onclick="delAufmass(\''+r.id+'\')">🗑</button></div>'
+      +'</div>'; }).join('')
+    : '<div class="empty">'+(q?'Kein Aufmaß gefunden.':'Noch keine Aufmaße gespeichert.')+'</div>';
+  const h=document.getElementById('storeHint');
+  if(h && navigator.storage && navigator.storage.estimate){
+    navigator.storage.estimate().then(e=>{ h.innerHTML=all.length+' Aufmaße auf diesem Gerät · belegt ca. '
+      +Math.round((e.usage||0)/1048576)+' MB. Fertige Aufmaße zusätzlich als .json oder PDF sichern.'; }).catch(()=>{});
+  }
+}
+document.addEventListener('input',touch,true);
+document.addEventListener('click',touch,true);
+window.addEventListener('pagehide',()=>saveLocal());
+document.addEventListener('visibilitychange',()=>{ if(document.hidden) saveLocal(); });
+
+/* ==================================================================
+   7) FOTOS & SKIZZEN
+   ================================================================== */
+let fotoFor=null;
+function addFoto(i){ fotoFor=i; document.getElementById('fotoIn').click(); }
+function loadImg(src){ return new Promise((res,rej)=>{ const im=new Image(); im.onload=()=>res(im); im.onerror=rej; im.src=src; }); }
+async function shrink(file,max,q){
+  const url=URL.createObjectURL(file);
+  try{
+    const im=await loadImg(url);
+    let w=im.naturalWidth, h=im.naturalHeight; const s=Math.min(1,max/Math.max(w,h));
+    w=Math.round(w*s); h=Math.round(h*s);
+    const c=document.createElement('canvas'); c.width=w; c.height=h;
+    const x=c.getContext('2d'); x.fillStyle='#fff'; x.fillRect(0,0,w,h); x.drawImage(im,0,0,w,h);
+    return c.toDataURL('image/jpeg',q);
+  } finally { URL.revokeObjectURL(url); }
+}
+document.getElementById('fotoIn').addEventListener('change',async e=>{
+  const files=[...e.target.files]; e.target.value='';
+  if(!files.length||fotoFor==null||!D.pos[fotoFor]) return;
+  info('Foto wird gespeichert …');
+  for(const f of files){
+    try{ await addMedia(fotoFor,'foto',await shrink(f,1600,.82)); }
+    catch(err){ alert('Foto konnte nicht übernommen werden.'); }
+  }
+  renderPos();
+});
+async function addMedia(i,typ,data){
+  const m={id:newId('m'),aid:D.id,typ,data,t:Date.now()};
+  if(DB) await dbPut('media',m);
+  MEDIA.set(m.id,m);
+  D.pos[i].media=D.pos[i].media||[]; D.pos[i].media.push(m.id);
+  await saveLocal(true); return m;
+}
+async function delMedia(id){ MEDIA.delete(id); try{ if(DB) await dbDel('media',id); }catch(e){} }
+
+/* ---- Bildansicht ---- */
+let vw={i:0,k:0};
+function openViewer(i,k){ vw={i,k}; drawViewer(); document.getElementById('viewer').classList.add('on'); }
+function drawViewer(){ const m=MEDIA.get((D.pos[vw.i].media||[])[vw.k]); document.getElementById('vImg').src=m?m.data:''; }
+function viewStep(d){ const n=(D.pos[vw.i].media||[]).length; if(!n) return; vw.k=(vw.k+d+n)%n; drawViewer(); }
+function closeViewer(){ document.getElementById('viewer').classList.remove('on'); }
+async function viewDel(){
+  if(!confirm('Dieses Bild löschen?')) return;
+  const id=D.pos[vw.i].media.splice(vw.k,1)[0];
+  await delMedia(id); await saveLocal(true); closeViewer(); renderPos();
+}
+function viewEdit(){ const m=MEDIA.get(D.pos[vw.i].media[vw.k]); closeViewer(); if(m) openSketch(vw.i,m); }
+
+/* ---- Skizzen-Editor (Apple Pencil / Finger) ---- */
+const SK={i:0,media:null,tool:'pen',color:'#111111',w:6,bg:'karo',strokes:[],cur:null,W:1600,H:1200,bgImg:null};
+const skC=()=>document.getElementById('skC'), skB=()=>document.getElementById('skBgC');
+function newSketch(i){ openSketch(i,null); }
+async function openSketch(i,m){
+  SK.i=i; SK.media=m; SK.strokes=[]; SK.cur=null; SK.bgImg=null;
+  if(m){ SK.bgImg=await loadImg(m.data); SK.W=SK.bgImg.naturalWidth; SK.H=SK.bgImg.naturalHeight; }
+  else { SK.W=1600; SK.H=1200; }
+  document.getElementById('skBg').style.display=m?'none':'';
+  document.getElementById('sked').classList.add('on');
+  const c=skC(), b=skB(); c.width=b.width=SK.W; c.height=b.height=SK.H;
+  await drawBg(); skFit(); redraw();
+}
+async function drawBg(){
+  const x=skB().getContext('2d'), W=SK.W, H=SK.H;
+  x.fillStyle='#fff'; x.fillRect(0,0,W,H);
+  if(SK.bgImg){ x.drawImage(SK.bgImg,0,0,W,H); return; }
+  if(SK.bg==='karo'||SK.bg==='typ'){
+    for(let g=0; g<=Math.max(W,H); g+=40){
+      x.strokeStyle=g%200===0?'#c9d6e8':'#e6edf6'; x.lineWidth=g%200===0?1.6:1;
+      x.beginPath(); x.moveTo(g,0); x.lineTo(g,H); x.stroke();
+      x.beginPath(); x.moveTo(0,g); x.lineTo(W,g); x.stroke();
+    }
+  }
+  if(SK.bg==='typ'){
+    const p=D.pos[SK.i];
+    if(p && TYPES[p.typ]){
+      let svg=svgType(p.typ,330,250,{l:p.l,m:p.m,r:p.r}).replace('<svg ','<svg xmlns="http://www.w3.org/2000/svg" ');
+      const im=await loadImg('data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg));
+      const f=Math.min((W*.62)/im.width,(H*.62)/im.height), w=im.width*f, h=im.height*f;
+      x.drawImage(im,(W-w)/2,(H-h)/2,w,h);
+      x.fillStyle='#14356b'; x.font='bold 30px -apple-system,Arial'; x.textAlign='left';
+      x.fillText('Pos. '+(SK.i+1)+' · Typ '+p.typ+(p.raum?' · '+p.raum:''),30,50);
+    } else {
+      x.fillStyle='#98a2ae'; x.font='bold 34px -apple-system,Arial'; x.textAlign='center';
+      x.fillText('Für diese Position ist noch kein Fenstertyp gewählt',W/2,H/2);
+    }
+  }
+}
+function skFit(){
+  const wr=document.getElementById('skWrap'), aw=wr.clientWidth-20, ah=wr.clientHeight-20;
+  const s=Math.min(aw/SK.W, ah/SK.H), st=document.getElementById('skStage');
+  st.style.width=Math.floor(SK.W*s)+'px'; st.style.height=Math.floor(SK.H*s)+'px';
+}
+function skPt(e){ const r=skC().getBoundingClientRect();
+  return {x:(e.clientX-r.left)*SK.W/r.width, y:(e.clientY-r.top)*SK.H/r.height,
+          p:e.pointerType==='pen'?(e.pressure||.5):.5}; }
+const SC=()=>SK.W/1600;
+function drawItem(x,s){
+  x.save(); x.lineCap='round'; x.lineJoin='round'; x.strokeStyle=s.c; x.fillStyle=s.c;
+  const sc=Math.max(SC(),.4);
+  if(s.k==='pen'||s.k==='erase'){
+    if(s.k==='erase') x.globalCompositeOperation='destination-out';
+    const base=s.w*sc*(s.k==='erase'?4:1);
+    if(s.pts.length===1){ x.beginPath(); x.arc(s.pts[0].x,s.pts[0].y,base/2,0,7); x.fill(); }
+    for(let j=1;j<s.pts.length;j++){ const a=s.pts[j-1], b=s.pts[j];
+      x.lineWidth=base*(.4+b.p*1.2); x.beginPath(); x.moveTo(a.x,a.y); x.lineTo(b.x,b.y); x.stroke(); }
+  } else if(s.k==='mass'){
+    const a=s.a, b=s.b, dx=b.x-a.x, dy=b.y-a.y, L=Math.hypot(dx,dy)||1, nx=-dy/L, ny=dx/L, ux=dx/L, uy=dy/L;
+    const t=14*sc, ar=18*sc;
+    x.lineWidth=Math.max(2,s.w*.5*sc);
+    x.beginPath(); x.moveTo(a.x,a.y); x.lineTo(b.x,b.y); x.stroke();
+    [[a,1],[b,-1]].forEach(([q,d])=>{
+      x.beginPath(); x.moveTo(q.x+nx*t,q.y+ny*t); x.lineTo(q.x-nx*t,q.y-ny*t); x.stroke();
+      x.beginPath(); x.moveTo(q.x,q.y); x.lineTo(q.x+d*ux*ar+nx*ar*.4,q.y+d*uy*ar+ny*ar*.4);
+      x.lineTo(q.x+d*ux*ar-nx*ar*.4,q.y+d*uy*ar-ny*ar*.4); x.closePath(); x.fill(); });
+    if(s.s) txt(x,s.s,(a.x+b.x)/2-nx*26*sc,(a.y+b.y)/2-ny*26*sc,(26+s.w*1.5)*sc,s.c);
+  } else if(s.k==='text'){
+    txt(x,s.s,s.x,s.y,(24+s.w*3)*sc,s.c);
+  }
+  x.restore();
+}
+function txt(x,s,cx,cy,fs,c){
+  x.font='bold '+Math.round(fs)+'px -apple-system,Arial'; x.textAlign='center'; x.textBaseline='middle';
+  const w=x.measureText(s).width;
+  x.fillStyle='rgba(255,255,255,.88)'; x.fillRect(cx-w/2-6,cy-fs*.62,w+12,fs*1.24);
+  x.fillStyle=c; x.fillText(s,cx,cy);
+}
+function redraw(){ const x=skC().getContext('2d'); x.clearRect(0,0,SK.W,SK.H);
+  SK.strokes.forEach(s=>drawItem(x,s)); if(SK.cur) drawItem(x,SK.cur.k==='mass'?{k:'mass',a:SK.cur.pts[0],
+    b:SK.cur.pts[SK.cur.pts.length-1],c:SK.cur.c,w:SK.cur.w}:SK.cur); }
+(function(){
+  const cv=skC(), pen=document.getElementById('skPen');
+  let penSeen=false;
+  cv.addEventListener('pointerdown',e=>{
+    if(e.pointerType==='pen' && !penSeen){ penSeen=true; pen.checked=true; }   // Handballen ab jetzt ignorieren
+    if(pen.checked && e.pointerType==='touch') return;
+    e.preventDefault();
+    const p=skPt(e);
+    if(SK.tool==='text'){ const s=prompt('Text / Maß eingeben:'); if(s){ SK.strokes.push({k:'text',x:p.x,y:p.y,s,c:SK.color,w:SK.w}); redraw(); } return; }
+    try{ cv.setPointerCapture(e.pointerId); }catch(err){}
+    SK.cur={k:SK.tool,c:SK.color,w:SK.w,pts:[p],id:e.pointerId};
+    if(SK.tool!=='mass') drawItem(cv.getContext('2d'),SK.cur);
+  });
+  cv.addEventListener('pointermove',e=>{
+    if(!SK.cur||e.pointerId!==SK.cur.id) return; e.preventDefault();
+    let evs=e.getCoalescedEvents?e.getCoalescedEvents():[]; if(!evs||!evs.length) evs=[e];
+    if(SK.cur.k==='mass'){ SK.cur.pts.push(skPt(e)); redraw(); return; }
+    const x=cv.getContext('2d');
+    evs.forEach(ev=>{ const q=skPt(ev), last=SK.cur.pts[SK.cur.pts.length-1]; SK.cur.pts.push(q);
+      drawItem(x,{k:SK.cur.k,c:SK.cur.c,w:SK.cur.w,pts:[last,q]}); });
+  });
+  const end=e=>{
+    if(!SK.cur||e.pointerId!==SK.cur.id) return;
+    const c=SK.cur; SK.cur=null;
+    if(c.k==='mass'){
+      const a=c.pts[0], b=c.pts[c.pts.length-1];
+      if(Math.hypot(b.x-a.x,b.y-a.y)>20){ const s=prompt('Maß eintragen (z. B. 1235):','');
+        if(s!==null) SK.strokes.push({k:'mass',a,b,s,c:c.c,w:c.w}); }
+    } else SK.strokes.push(c);
+    redraw();
+  };
+  cv.addEventListener('pointerup',end); cv.addEventListener('pointercancel',end);
+  const pick=(boxId,attr,fn)=>document.getElementById(boxId).addEventListener('click',e=>{
+    const b=e.target.closest('button'); if(!b||b.dataset[attr]==null) return;
+    [...b.parentNode.children].forEach(x=>x.classList.remove('on')); b.classList.add('on'); fn(b.dataset[attr]); });
+  pick('skTools','t',v=>SK.tool=v);
+  pick('skCols','c',v=>SK.color=v);
+  pick('skW','w',v=>SK.w=+v);
+  pick('skBg','b',v=>{ SK.bg=v; drawBg(); });
+})();
+function skUndo(){ SK.strokes.pop(); redraw(); }
+function skClear(){ if(SK.strokes.length && confirm('Alle Striche entfernen?')){ SK.strokes=[]; redraw(); } }
+function skClose(force){
+  if(!force && SK.strokes.length && !confirm('Skizze schließen, ohne zu speichern?')) return;
+  document.getElementById('sked').classList.remove('on');
+}
+async function skSave(){
+  const c=document.createElement('canvas'); c.width=SK.W; c.height=SK.H;
+  const x=c.getContext('2d'); x.drawImage(skB(),0,0); x.drawImage(skC(),0,0);
+  const data=c.toDataURL('image/jpeg',.85);
+  try{
+    if(SK.media){ SK.media.data=data; SK.media.t=Date.now(); if(DB) await dbPut('media',SK.media); MEDIA.set(SK.media.id,SK.media); await saveLocal(true); }
+    else await addMedia(SK.i,'skizze',data);
+  }catch(e){ alert('Skizze konnte nicht gespeichert werden.'); return; }
+  skClose(true); renderPos();
+}
+window.addEventListener('resize',()=>{ if(document.getElementById('sked').classList.contains('on')) skFit(); });
+
+/* ---------------- Teilen (iOS Share Sheet) ---------------- */
+function fileName(ext){
+  return 'Aufmass_'+((D.kopf.kommission||D.kopf.kunde||'ohne_Namen')+'')
+    .replace(/[^\wäöüÄÖÜß-]+/g,'_')+'_'+(D.kopf.datum||'')+'.'+ext;
+}
+/* ---- Native App (Capacitor) ---- */
+const CAP=window.Capacitor;
+const NATIVE=!!(CAP && CAP.isNativePlatform && CAP.isNativePlatform());
+const plug=n=>NATIVE ? CAP.registerPlugin(n) : null;
+const NShare=plug('Share'), NFS=plug('Filesystem'), NPrint=plug('AufmassNative');
+async function nativeShareFile(name,content,text){
+  const w=await NFS.writeFile({path:name,data:content,directory:'CACHE',encoding:'utf8'});
+  try{ await NShare.share({title:name,text:text||undefined,files:[w.uri]}); }
+  catch(e){ if(!/cancel/i.test(String(e&&e.message||e))) throw e; }
+}
+async function shareAll(){
+  const txt=buildText();
+  const json=JSON.stringify(exportObj());
+  if(NATIVE){ try{ await nativeShareFile(fileName('json'),json,txt); }catch(e){ alert('Teilen nicht möglich: '+(e&&e.message||e)); } return; }
+  try{
+    const f=new File([json],fileName('json'),{type:'application/json'});
+    if(navigator.canShare && navigator.canShare({files:[f]})){
+      await navigator.share({files:[f], title:'Aufmaß '+(D.kopf.kommission||''), text:txt});
+      return;
+    }
+    if(navigator.share){ await navigator.share({title:'Aufmaß '+(D.kopf.kommission||''), text:txt}); return; }
+  }catch(e){ if(e && e.name==='AbortError') return; }
+  saveJSON();
+}
+function mailTo(){
+  const adr=(D.kopf.mailTo||'info@bewa-plast.de').trim();
+  const betr=(D.kopf.vorgang||'Anfrage')+' Fenster '+(D.kopf.serie||'')
+    +(D.kopf.kommission?' – '+D.kopf.kommission:'');
+  location.href='mailto:'+encodeURIComponent(adr)+'?subject='+encodeURIComponent(betr)
+    +'&body='+encodeURIComponent(buildText());
+}
+
+/* ==================================================================
+   8) MESSGERÄT ÜBER BLUETOOTH (nur in der iPad-App) – z. B. nedo mEsstronic 2
+   Verbindet sich per Bluetooth LE, abonniert alle Datenkanäle des Geräts und
+   übernimmt Messwerte ins orange markierte Feld. Klartext-Werte („1234“, „1,234 m“)
+   werden automatisch erkannt; binäre Formate lassen sich einmalig „einlernen“.
+   ================================================================== */
+const BLE=plug('BluetoothLe');
+const BT={dev:null,name:'',subs:[],last:{},log:[],map:null};
+let BTT=null;                                   // Zielfeld {i: Position, w: 'b'|'h'}
+try{ BT.map=JSON.parse(localStorage.getItem('bewaAufmass.btMap')||'null'); }catch(e){}
+function toast(t){ const el=document.getElementById('toast'); if(!el) return; el.textContent=t; el.classList.add('on');
+  clearTimeout(toast.t); toast.t=setTimeout(()=>el.classList.remove('on'),2000); }
+function markTarget(){
+  document.querySelectorAll('.masse input.target').forEach(e=>e.classList.remove('target'));
+  if(!BT.dev||!BTT) return;
+  const el=document.querySelector('input[data-m="'+BTT.w+'"][data-i="'+BTT.i+'"]'); if(el) el.classList.add('target');
+}
+document.addEventListener('focusin',e=>{ const el=e.target;
+  if(el&&el.dataset&&el.dataset.m&&el.dataset.i!=null){ BTT={i:+el.dataset.i,w:el.dataset.m}; markTarget(); } });
+const shortU=u=>{ const m=/^0000([0-9a-f]{4})-0000-1000-8000-00805f9b34fb$/i.exec(u||''); return m?m[1]:String(u||'').slice(0,8); };
+const hexBytes=s=>{ const h=String(s||'').replace(/[^0-9a-f]/gi,''), a=[];
+  for(let i=0;i+1<h.length;i+=2) a.push(parseInt(h.substr(i,2),16)); return a; };
+function btLog(s){
+  const d=new Date(); BT.log.push(('0'+d.getHours()).slice(-2)+':'+('0'+d.getMinutes()).slice(-2)+':'+('0'+d.getSeconds()).slice(-2)+'  '+s);
+  if(BT.log.length>300) BT.log.shift();
+  const el=document.getElementById('btLog'); if(el){ el.textContent=BT.log.slice(-80).join('\n'); el.scrollTop=el.scrollHeight; }
+}
+function btUi(){
+  const b=document.getElementById('btBtn'); if(!b) return;
+  b.style.display=NATIVE?'inline-flex':'none'; b.classList.toggle('on',!!BT.dev);
+  document.getElementById('btState').textContent=BT.dev?(BT.name||'verbunden'):'Messgerät';
+  document.getElementById('btSub').textContent=BT.dev?' · verbunden: '+(BT.name||BT.dev):' · nicht verbunden';
+  document.getElementById('btMap').innerHTML=BT.map
+    ? '✓ Eingelernt: Kanal '+esc(shortU(BT.map.ch))+' · '+esc(BT.map.kind)+(BT.map.off!=null?' ab Byte '+BT.map.off:'')
+      +(BT.map.scale!==1?' · Faktor '+BT.map.scale:'')
+    : 'Nicht eingelernt – Messwerte im Klartext werden automatisch erkannt.';
+  markTarget();
+}
+function openBt(){ btUi(); document.getElementById('btModal').classList.add('on'); }
+function closeBt(){ document.getElementById('btModal').classList.remove('on'); }
+function btErr(e){ const m=(e&&e.message)||String(e); btLog('Fehler: '+m); if(!/cancel|abgebrochen/i.test(m)) alert('Bluetooth: '+m); }
+
+async function btConnect(){
+  if(!BLE){ alert('Bluetooth gibt es nur in der iPad-App.'); return; }
+  try{ await BLE.initialize({}); const d=await BLE.requestDevice({}); await btOpen(d.deviceId,d.name||''); }
+  catch(e){ btErr(e); }
+}
+async function btReconnect(){
+  if(!BLE) return;
+  let id=null,name=''; try{ id=localStorage.getItem('bewaAufmass.btDev'); name=localStorage.getItem('bewaAufmass.btName')||''; }catch(e){}
+  if(!id){ alert('Es war noch kein Messgerät verbunden – bitte „Gerät suchen“.'); return; }
+  try{ await BLE.initialize({}); await btOpen(id,name); }catch(e){ btErr(e); }
+}
+async function btDisconnect(silent){
+  for(const h of BT.subs){ try{ await h.remove(); }catch(e){} } BT.subs=[];
+  if(BT.dev && BLE){ try{ await BLE.disconnect({deviceId:BT.dev}); }catch(e){} }
+  BT.dev=null; btUi(); if(!silent) btLog('Getrennt.');
+}
+async function btOpen(id,name){
+  await btDisconnect(true);
+  btLog('Verbinde mit '+(name||id)+' …');
+  try{ await BLE.getDevices({deviceIds:[id]}); }catch(e){}
+  BT.subs.push(await BLE.addListener('disconnected|'+id,()=>{ btLog('Verbindung vom Gerät getrennt.');
+    BT.dev=null; btUi(); toast('Messgerät getrennt'); }));
+  await BLE.connect({deviceId:id,timeout:15000});
+  BT.dev=id; BT.name=name;
+  try{ localStorage.setItem('bewaAufmass.btDev',id); localStorage.setItem('bewaAufmass.btName',name); }catch(e){}
+  const res=await BLE.getServices({deviceId:id}); let n=0;
+  for(const s of (res.services||[])) for(const c of (s.characteristics||[])){
+    const p=c.properties||{};
+    btLog('Dienst '+shortU(s.uuid)+' · Kanal '+shortU(c.uuid)+' ['+Object.keys(p).filter(k=>p[k]).join(',')+']');
+    if(p.notify||p.indicate){
+      BT.subs.push(await BLE.addListener('notification|'+id+'|'+s.uuid+'|'+c.uuid, ev=>btData(c.uuid,ev&&ev.value)));
+      try{ await BLE.startNotifications({deviceId:id,service:s.uuid,characteristic:c.uuid}); n++; }
+      catch(e){ btLog('  Abo fehlgeschlagen: '+((e&&e.message)||e)); }
+    }
+  }
+  btLog(n+' Datenkanal/-kanäle abonniert – jetzt messen.');
+  if(!BTT && D.pos.length) BTT={i:isWide()?sel:0,w:'b'};
+  btUi(); toast('📏 Messgerät verbunden');
+}
+const NUMK={u16le:2,u16be:2,u32le:4,u32be:4,i32le:4,i32be:4,f32le:4,f32be:4};
+function readNum(b,kind,off){
+  if(kind==='ascii') return asciiMm(b,true);
+  const sz=NUMK[kind]; if(!sz||off+sz>b.length) return null;
+  const v=new DataView(new Uint8Array(b.slice(off,off+sz)).buffer), le=/le$/.test(kind);
+  switch(kind.slice(0,3)){
+    case 'u16': return v.getUint16(0,le); case 'u32': return v.getUint32(0,le);
+    case 'i32': return v.getInt32(0,le);  case 'f32': return v.getFloat32(0,le);
+  }
+  return null;
+}
+function asciiMm(b,loose){
+  const body=b.filter(x=>![0,9,10,13].includes(x));            // Zeilenende/Nullbytes ignorieren
+  if(!body.length) return null;
+  const pr=body.filter(x=>x>=32&&x<127);
+  if(!loose && pr.length/body.length<.8) return null;        // eher Binärdaten
+  const m=String.fromCharCode(...pr).match(/-?\d+(?:[.,]\d+)?\s*(mm|cm|m)?/i);
+  if(!m || !(/\d{2,}|[.,]/.test(m[0]))) return null;
+  const v=+normMass(m[0]); return isNaN(v)||v<=0?null:v;
+}
+function btData(ch,raw){
+  const b=hexBytes(raw); BT.last[ch]={b,t:Date.now()};
+  btLog('← '+shortU(ch)+': '+b.map(x=>('0'+x.toString(16)).slice(-2)).join(' ')
+    +'  |'+b.map(x=>x>=32&&x<127?String.fromCharCode(x):'.').join('')+'|');
+  let mm=null;
+  if(BT.map){ if(BT.map.ch===ch){ const v=readNum(b,BT.map.kind,BT.map.off); if(v!=null) mm=Math.round(v*BT.map.scale); } }
+  else mm=asciiMm(b,false);
+  if(mm==null||mm<=0||mm>20000) return;
+  btLog('   → '+mm+' mm'); btValue(mm);
+}
+function btValue(mm){
+  if(!D.pos.length){ toast(mm+' mm – zuerst eine Position anlegen'); return; }
+  if(!BTT||!D.pos[BTT.i]) BTT={i:isWide()?sel:0,w:'b'};
+  const i=BTT.i, w=BTT.w, k=w==='b'?'breite':'hoehe';
+  const ae=document.activeElement; if(ae&&ae.dataset&&ae.dataset.m) ae.blur();
+  D.pos[i][k]=String(mm);
+  const el=document.querySelector('input[data-m="'+w+'"][data-i="'+i+'"]');
+  if(el){ el.value=D.pos[i][k]; el.classList.add('hot'); setTimeout(()=>el.classList.remove('hot'),700); }
+  toast('📏 '+mm+' mm → Pos. '+(i+1)+' '+(w==='b'?'Breite':'Höhe'));
+  light(i); touch();
+  if(w==='b') BTT={i,w:'h'};
+  else if(i+1<D.pos.length){ BTT={i:i+1,w:'b'};
+    if(isWide()) sel=i+1; else { D.pos.forEach(x=>x._o=false); D.pos[i+1]._o=true; }
+    renderPos(); scrollToPos(i+1); }
+  else setTimeout(()=>toast('Letzte Position gemessen – mit „＋ Position“ weiter'),2100);
+  markTarget();
+}
+function btLearn(){
+  const X=+normMass(document.getElementById('btCal').value);
+  if(!X){ alert('Bitte den Wert eintragen, der auf dem Messgerät angezeigt wird.'); return; }
+  const now=Date.now(), chans=Object.keys(BT.last).filter(c=>now-BT.last[c].t<120000)
+    .sort((a,b)=>BT.last[b].t-BT.last[a].t);
+  if(!chans.length){ alert('Noch keine Messung empfangen. Erst messen, dann zuordnen.'); return; }
+  for(const ch of chans){
+    const b=BT.last[ch].b;
+    if(Math.abs((asciiMm(b,true)||-1e9)-X)<=1) return btSaveMap({ch,kind:'ascii',off:null,scale:1});
+    for(const scale of [1,.1,1000,.01,10,25.4])
+      for(const kind of Object.keys(NUMK))
+        for(let off=0; off+NUMK[kind]<=b.length; off++){
+          const v=readNum(b,kind,off);
+          if(v!=null && isFinite(v) && Math.abs(v*scale-X)<=1) return btSaveMap({ch,kind,off,scale});
+        }
+  }
+  alert('Der Wert '+X+' mm wurde in den letzten Daten nicht gefunden.\nBitte „Diagnose kopieren“ und an Simon schicken.');
+}
+function btSaveMap(m){
+  BT.map=m; try{ localStorage.setItem('bewaAufmass.btMap',JSON.stringify(m)); }catch(e){}
+  btLog('Eingelernt: '+JSON.stringify(m)); btUi(); toast('✓ Messgerät eingelernt');
+}
+function btForget(){ BT.map=null; try{ localStorage.removeItem('bewaAufmass.btMap'); }catch(e){} btUi(); }
+function btCopyLog(){
+  const t='Messgerät '+(BT.name||'')+'\n'+BT.log.join('\n');
+  if(NATIVE) NShare.share({title:'Diagnose Messgerät',text:t}).catch(()=>{});
+  else if(navigator.clipboard) navigator.clipboard.writeText(t);
+}
+
+/* ---------------- Start ---------------- */
+btUi();
+initKopf(); renderSys(); segHook('massart'); renderPos(); renderOvw();
+function setHH(){ const h=document.querySelector('header'); if(h) document.documentElement.style.setProperty('--hh',h.offsetHeight+'px'); }
+setHH(); window.addEventListener('resize',setHH);
+let wasWide=isWide();
+window.addEventListener('resize',()=>{ const w=isWide(); if(w!==wasWide){ wasWide=w; renderPos(); } });
+(async function start(){
+  try{ DB=await dbOpen(); }catch(e){ DB=null; }
+  if(!DB){ info('Speichern nicht möglich'); return; }
+  try{ if(navigator.storage && navigator.storage.persist) navigator.storage.persist(); }catch(e){}
+  // Übernahme aus der Vorversion (ein einzelnes Aufmaß im localStorage)
+  try{
+    const raw=localStorage.getItem(OLD_STORE);
+    if(raw && !localStorage.getItem('bewaAufmass.migriert')){
+      const j=JSON.parse(raw);
+      if((j.pos||[]).length || (j.kopf&&(j.kopf.kunde||j.kopf.kommission)))
+        await dbPut('aufmasse',{id:newId(),kopf:Object.assign(clone(DEF_KOPF),j.kopf||{}),
+          pos:(j.pos||[]).map(p=>Object.assign({},p,{media:[]})),seq:j.seq||0,t:j.t||Date.now(),c:j.t||Date.now()});
+      localStorage.setItem('bewaAufmass.migriert','1');
+    }
+  }catch(e){}
+  let cur=null; try{ cur=localStorage.getItem(CUR); }catch(e){}
+  if(!(cur && await openAufmass(cur))){
+    const all=(await dbAll('aufmasse')).sort((a,b)=>(b.t||0)-(a.t||0));
+    if(all.length) await openAufmass(all[0].id); else await createAufmass();
+  }
+})();
+
+if('serviceWorker' in navigator && location.protocol==='https:'){
+  navigator.serviceWorker.register('sw.js').catch(()=>{});
+}
+</script>
+</body>
+</html>

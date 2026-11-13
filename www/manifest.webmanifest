@@ -1,0 +1,20 @@
+{
+  "name": "bewa Aufmaß – Fenster Vario 6 · 7 · 8",
+  "short_name": "bewa Aufmaß",
+  "description": "Aufmaß-App für Kunststofffenster bewa-plast Vario 6 CUBEline, K85 Vario 7 und Vario 8 – Positionserfassung vor Ort mit PDF im Bestellvordruck-Layout.",
+  "lang": "de",
+  "dir": "ltr",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#14356b",
+  "theme_color": "#14356b",
+  "categories": ["business", "productivity", "utilities"],
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" },
+    { "src": "icon-1024.png", "sizes": "1024x1024", "type": "image/png", "purpose": "any" }
+  ]
+}
