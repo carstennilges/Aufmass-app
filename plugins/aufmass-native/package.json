@@ -1,0 +1,17 @@
+{
+  "name": "aufmass-native",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Native Hilfen für die Aufmaß-App: AirPrint/PDF des Bestellvordrucks",
+  "main": "index.js",
+  "license": "UNLICENSED",
+  "files": ["ios/", "AufmassNative.podspec", "index.js"],
+  "capacitor": {
+    "ios": {
+      "src": "ios"
+    }
+  },
+  "peerDependencies": {
+    "@capacitor/core": ">=7.0.0"
+  }
+}
