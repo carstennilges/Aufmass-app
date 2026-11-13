@@ -22,7 +22,11 @@ jobs:
           node-version: 20
 
       - name: Abhängigkeiten installieren
-        run: npm install --no-audit --no-fund
+        run: |
+          npm install --no-audit --no-fund
+          # Capacitor-Laufzeit (registerPlugin usw.) in die App legen – ohne sie sind Bluetooth, Teilen und Drucken nicht erreichbar
+          cp node_modules/@capacitor/core/dist/capacitor.js www/capacitor.js
+          ls -la www/capacitor.js
 
       - name: iOS-Projekt erzeugen
         run: |
